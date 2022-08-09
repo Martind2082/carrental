@@ -1,0 +1,244 @@
+{
+    "carslist": [
+        {
+            "id": 0,
+            "name": "Honda Civic",
+            "color": "red",
+            "rent": "$55.50",
+            "image": "https://hips.hearstapps.com/autoweek/assets/2020%252520Honda%252520Civic%252520Si%252520Coupe%252520%252520009_0.jpg",
+            "type": "gas",
+            "horsepower": 205,
+            "drivetrain": 4
+        },
+        {
+            "id": 1,
+            "name": "Honda Accura",
+            "color": "blue",
+            "rent": "$60.00",
+            "image": "https://media.ed.edmunds-media.com/acura/tlx/2021/oem/2021_acura_tlx_sedan_type-s_fq_oem_1_1600.jpg",
+            "type": "gas",
+            "horsepower": 213,
+            "drivetrain": 4
+        },
+        {
+            "id": 2,
+            "name": "Honda Pilot",
+            "color": "deep blue",
+            "rent": "$55.00",
+            "image": "https://images.hgmsites.net/hug/2021-honda-pilot_100749543_h.jpg",
+            "type": "gas",
+            "horsepower": 192,
+            "drivetrain": 4
+        },
+        {
+            "id": 3,
+            "name": "Honda Oddysey",
+            "color": "light gray",
+            "rent": "$70.00",
+            "image": "https://hips.hearstapps.com/hmg-prod/images/2022-honda-odyssey-mmp-1-1610751865.jpg?crop=0.867xw:0.976xh;0.0689xw,0.0240xh&resize=640:*",
+            "type": "gas",
+            "horsepower": 180,
+            "drivetrain": 4
+        },
+        {
+            "id": 4,
+            "name": "Toyota Camry",
+            "color": "black matte",
+            "rent": "$65.00",
+            "image": "https://www.naplesillustrated.com/wp-content/uploads/sites/82/2021/05/Toyota-Camry-XLE-4-1024x640.jpg",
+            "type": "gas",
+            "horsepower": 190,
+            "drivetrain": 2
+        },
+        {
+            "id": 5,
+            "name": "Toyota Corolla",
+            "color": "dark blue",
+            "rent": "$45.00",
+            "image": "https://media.ed.edmunds-media.com/toyota/corolla/2020/oem/2020_toyota_corolla_sedan_se_fq_oem_1_1280.jpg",
+            "type": "gas",
+            "horsepower": 197,
+            "drivetrain": 4
+        },
+        {
+            "id": 6,
+            "name": "Toyota Prius",
+            "color": "cyan",
+            "rent": "$50.00",
+            "image": "https://images.honestjohn.co.uk/imagecache/file/crop/1200x800/media/12498748/Toyota~Prius~Plug~in~2017~(1).jpg",
+            "type": "gas",
+            "horsepower": 165,
+            "drivetrain": 2
+        },
+        {
+            "id": 7,
+            "name": "Toyota Mirai",
+            "color": "dark blue",
+            "rent": "$66.50",
+            "image": "https://www.kbb.com/wp-content/uploads/2020/12/2021-toyota-mirai-blue-front-3qtr-16x9-1.jpg?w=763",
+            "type": "gas",
+            "horsepower": 203,
+            "drivetrain": 4
+        },
+        {
+            "id": 8,
+            "name": "Subaru Outback",
+            "color": "dark green",
+            "rent": "$65.50",
+            "image": "hhttps://cloudflareimages.dealereprocess.com/resrc/images/c_limit,fl_lossy,w_500/v1/dvp/271/5602367195/New-2022-Subaru-Outback-TouringXT-ID5602367195-aHR0cDovL2ltYWdlcy51bml0c2ludmVudG9yeS5jb20vdXBsb2Fkcy9waG90b3MvMC8yMDIyLTA3LTI2LzEtOTI5MTEwNi02MmUwNzc5YTQxNGFhLmpwZw==",
+            "type": "gas",
+            "horsepower": 201,
+            "drivetrain": 4
+        },
+        {
+            "id": 9,
+            "name": "Subaru Forester",
+            "color": "blue",
+            "rent": "$48.50",
+            "image": "https://cars.usnews.com/images/article/202110/128997/1_2022_subaru_forester_wilderness.jpg",
+            "type": "gas",
+            "horsepower": 199,
+            "drivetrain": 4
+        },
+        {
+            "id": 10,
+            "name": "Subaru Crosstrek",
+            "color": "light blue",
+            "rent": "$49.50",
+            "image": "https://www.motortrend.com/uploads/sites/5/2019/01/2018-Subaru-Crosstrek-front-three-quarter-in-motion-2.jpg",
+            "type": "gas",
+            "horsepower": 198,
+            "drivetrain": 4
+        },
+        {
+            "id": 11,
+            "name": "Subaru Ascent",
+            "color": "white",
+            "rent": "$50.50",
+            "image": "https://hips.hearstapps.com/hmg-prod/images/2021-subaru-ascent-mmp-1-1594310641.jpg?crop=0.790xw:0.592xh;0.109xw,0.175xh&resize=1200:*",
+            "type": "gas",
+            "horsepower": 204,
+            "drivetrain": 4
+        },
+        {
+            "id": 12,
+            "name": "Nissan Kicks",
+            "color": "white",
+            "rent": "$53.50",
+            "image": "https://cdn.carbuzz.com/gallery-images/2022-nissan-kicks-carbuzz-786574.jpg",
+            "type": "gas",
+            "horsepower": 201,
+            "drivetrain": 4
+        },
+        {
+            "id": 13,
+            "name": "Nissan Rogue",
+            "color": "dark blue",
+            "rent": "$50.00",
+            "image": "https://www.autoguide.com/blog/wp-content/uploads/2022/04/2022-nissan-rogue-02.jpeg",
+            "type": "gas",
+            "horsepower": 197,
+            "drivetrain": 2
+        },
+        {
+            "id": 14,
+            "name": "Tesla Model3",
+            "color": "red",
+            "rent": "$80.00",
+            "image": "https://electrek.co/wp-content/uploads/sites/3/2021/07/Tesla-Model-3-Hero.jpg?quality=82&strip=all&w=1600",
+            "type": "electric",
+            "horsepower": 232,
+            "drivetrain": 4
+        },
+        {
+            "id": 15,
+            "name": "Tesla ModelX",
+            "color": "gray",
+            "rent": "$85.00",
+            "image": "https://cdn.carbuzz.com/gallery-images/840x560/880000/200/880292.jpg",
+            "type": "electric",
+            "horsepower": 230,
+            "drivetrain": 4
+        },
+        {
+            "id": 16,
+            "name": "Tesla Roadster",
+            "color": "red",
+            "rent": "$90.00",
+            "image": "https://hips.hearstapps.com/hmg-prod/amv-prod-cad-assets/wp-content/uploads/2017/11/Tesla-Roadster-103.jpg?crop=0.848xw:0.691xh;0.122xw,0.165xh&resize=640:*",
+            "type": "electric",
+            "horsepower": 240,
+            "drivetrain": 4
+        },
+        {
+            "id": 17,
+            "name": "Chevrolet Trailblazer",
+            "color": "dark yellow",
+            "rent": "$58.50",
+            "image": "https://www.motorbiscuit.com/wp-content/uploads/2022/05/Front-angle-view-of-yellow-2023-Chevy-Trailblazer-highlighting-its-release-date-and-price.jpg?w=925",
+            "type": "gas",
+            "horsepower": 205,
+            "drivetrain": 4
+        },
+        {
+            "id": 18,
+            "name": "Chevrolet Equinox",
+            "color": "red",
+            "rent": "$56.50",
+            "image": "https://i.gaw.to/vehicles/photos/40/19/401978-2020-chevrolet-equinox.jpg",
+            "type": "gas",
+            "horsepower": 205,
+            "drivetrain": 4
+        },
+        {
+            "id": 19,
+            "name": "Chevrolet Traverse",
+            "color": "dark red",
+            "rent": "$57.50",
+            "image": "https://media.ed.edmunds-media.com/chevrolet/traverse/2022/oem/2022_chevrolet_traverse_4dr-suv_high-country_fq_oem_1_1600.jpg",
+            "type": "gas",
+            "horsepower": 202,
+            "drivetrain": 4
+        },
+        {
+            "id": 20,
+            "name": "Ford Explorer",
+            "color": "blue",
+            "rent": "$57.00",
+            "image": "https://www.ford.com/cmslibs/content/dam/vdm_ford/live/en_us/ford/nameplate/explorer/2022/collections/equipments/3_2/21_FRD_EPR_07_Explorer_Hybrid_32.jpg/_jcr_content/renditions/cq5dam.web.768.768.jpeg",
+            "type": "gas",
+            "horsepower": 200,
+            "drivetrain": 4
+        },
+        {
+            "id": 21,
+            "name": "Ford Escape",
+            "color": "red",
+            "rent": "$55.00",
+            "image": "https://media.ed.edmunds-media.com/ford/escape/2018/oem/2018_ford_escape_4dr-suv_titanium_fq_oem_1_1600.jpg",
+            "type": "gas",
+            "horsepower": 201,
+            "drivetrain": 4
+        },
+        {
+            "id": 22,
+            "name": "Ford Maverick",
+            "color": "cyan",
+            "rent": "$62.50",
+            "image": "https://mobileautocanada.com/wp-content/uploads/2021/07/2022-Ford-Maverick-compact-pickup-truck-31.jpg",
+            "type": "gas",
+            "horsepower": 204,
+            "drivetrain": 4
+        },
+        {
+            "id": 23,
+            "name": "Ford Ranger",
+            "color": "dark yellow",
+            "rent": "$62.00",
+            "image": "https://hips.hearstapps.com/hmg-prod/images/nextgenranger-wildtrak-front-3qtr-static-1637737816.jpg?crop=0.893xw:1.00xh;0.0577xw,0&resize=640:*",
+            "type": "gas",
+            "horsepower": 205,
+            "drivetrain": 4
+        }
+    ]
+}
