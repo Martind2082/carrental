@@ -17,17 +17,29 @@ const FirebaseContext = ({children}) => {
         })
         return unsub;
     })
-    // function createaccount() {
-    //     createUserWithEmailAndPassword()
-    // }
-    // function signin() {
-
-    // }
-    // function signout() {
-    //     signOut(auth);
-    // }
+    function createaccount(email, password, e) {
+        e.preventDefault();
+        createUserWithEmailAndPassword(auth, email, password)
+            .catch(() => {
+                let popup = document.createElement('div');
+                popup.classList.add('popup');
+                popup.textContent = 'Password should be at least 6 characters in length';
+                document.body.append(popup);
+                setTimeout(() => {
+                    popup.remove();
+                }, 3500);
+            });
+    }
+    function login(email, password, e) {
+        e.preventDefault();
+        signInWithEmailAndPassword(auth, email, password)
+            .catch(err => console.log(err))
+    }
+    function signout() {
+        signOut(auth);
+    }
     return (
-        <firebasecontext.Provider value={{user}}>
+        <firebasecontext.Provider value={{user, createaccount, login, signout}}>
             {!loading && children}
         </firebasecontext.Provider>
     );
