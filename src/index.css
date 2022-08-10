@@ -39,4 +39,35 @@ body {
         transform: translat(-50%, -100%);
     }
 }
+.topbrands img {
+    width: 5rem;
+    height: 3rem;
+    transition: all 500ms ease;
+}
+.topbrands img:hover {
+    cursor: pointer;
+    transform: translateY(-20%);
+}
+.topbrands div {
+    position: relative;
+}
+#swiper {
+    width: 70%;
+}
+#swiper img {
+    width: 95%;
+    height: 40vh;
+    object-fit: cover;
+}
+#swiper img:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+.swipertitle {
+    position: absolute;
+    bottom: 1rem;
+    left: 0.5rem;
+    color: white;
+    font-weight: bold;
+}
 
