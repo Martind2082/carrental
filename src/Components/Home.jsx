@@ -32,13 +32,14 @@ const Home = ({setSort}) => {
             <form ref={formRef} onSubmit={(e) => handlesubmit(e, formRef.current.name.value, formRef.current.sort.value)} className="w-[70%] h-[8vh] rounded-md flex absolute top-3/4 left-1/2 translate-x-[-50%] justify-between">
                 <select name="name" defaultValue="select" required className="w-[30%] rounded-md px-3">
                     <option value="select" disabled>SELECT</option>
-                    <option value="honda">Honda</option>
-                    <option value="toyota">Toyota</option>
-                    <option value="subaru">Subaru</option>
-                    <option value="nissan">Nissan</option>
-                    <option value="tesla">Tesla</option>
                     <option value="chevrolet">Chevrolet</option>
                     <option value="ford">Ford</option>
+                    <option value="honda">Honda</option>
+                    <option value="lexus">Lexus</option>
+                    <option value="nissan">Nissan</option>
+                    <option value="subaru">Subaru</option>
+                    <option value="tesla">Tesla</option>
+                    <option value="toyota">Toyota</option>
                 </select>
                 <select name="sort" required className="w-[30%] rounded-md px-3">
                     <option value="lowtohigh">Price low to high</option>
