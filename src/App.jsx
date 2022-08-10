@@ -8,7 +8,6 @@ import Login from './Components/Login';
 import Createaccount from './Components/Createaccount';
 import Carsinfo from './Components/Carsinfo';
 import { useState } from 'react';
-import Carinfo from './Components/Carinfo';
 import Cars from './Components/Cars';
 
 function App() {
@@ -24,7 +23,6 @@ function App() {
           <Route exact path="/createaccount" element={<Createaccount />}/>
           <Route exact path="/cars" element={<Cars />}/>
           <Route exact path="/cars/:name" element={<Carsinfo sort={sort} />}/>
-          <Route exact path="/car/:id" element={<Carinfo />}/>
         </Routes>
       </Router>
     </FirebaseContext>
