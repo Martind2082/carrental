@@ -15,11 +15,11 @@ const Header = () => {
     }
     return (
         <header className="flex justify-between items-center w-screen h-[15vh] fixed font-bold z-[1]">
-            <img className="h-full ml-[10%]" src={logo} />
+            <img onClick={() => navigate("/")} className="hover h-full ml-[10%]" src={logo} />
             <div className="flex w-max justify-between items-center px-[2rem] text-2xl mr-5">
                 <Link to="/"><div className='hover:underline hover p-3'>Home</div></Link>
                 <Link to="/about"><div className='hover:underline hover p-3'>About us</div></Link>
-                <div className='hover:underline hover p-3'>Cars</div>
+                <Link to="/cars"><div className='hover:underline hover p-3'>Cars</div></Link>
                 <div onClick={loginclick} className='hover:underline hover p-3'>{user ? 'Sign out' : 'Login | Sign up'}</div>
             </div>
         </header>

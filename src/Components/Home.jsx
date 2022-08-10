@@ -45,7 +45,7 @@ const Home = ({setSort}) => {
                     <option value="hightolow">Price high to low</option>
                     <option value="rating">Rating</option>
                 </select>
-                <input className="w-[30%] rounded-md bg-gradient-to-r from-blue-300 to-blue-400" value="Search" type="submit"/>
+                <input className="hover w-[30%] rounded-md bg-gradient-to-r from-blue-300 to-blue-400" value="Search" type="submit"/>
             </form>
 
             <div className='p-10 5'>
