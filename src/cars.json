@@ -239,6 +239,116 @@
             "type": "gas",
             "horsepower": 205,
             "drivetrain": 4
+        },
+        {
+            "id": 24,
+            "name": "Subaru Impreza",
+            "color": "dark yellow",
+            "rent": "$61.00",
+            "image": "https://s7d1.scene7.com/is/image/scom/22_IMP_gallery_ext_02?$650j$",
+            "type": "gas",
+            "horsepower": 209,
+            "drivetrain": 4
+        },
+        {
+            "id": 25,
+            "name": "Ford F150",
+            "color": "dark blue",
+            "rent": "$65.00",
+            "image": "https://www.trucks.com/wp-content/uploads/2015/01/Ford-F-150-Raptor-Driver-Side-Full-Body-View1.jpg?ezimgfmt=ng%3Awebp%2Fngcb1%2Frs%3Adevice%2Frscb1-2",
+            "type": "gas",
+            "horsepower": 209,
+            "drivetrain": 4
+        },
+        {
+            "id": 26,
+            "name": "Ford Bronco",
+            "color": "light blue",
+            "rent": "$57.50",
+            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBOgyZHwnpzGuhyp04FASJP4kFXeYyYdK5S3-lv8H4TFIh4NFjtFaC_YmX_QDmUCJggPQ&usqp=CAU",
+            "type": "gas",
+            "horsepower": 188,
+            "drivetrain": 4
+        },
+        {
+            "id": 27,
+            "name": "Toyota Tundra",
+            "color": "dark green",
+            "rent": "$59.50",
+            "image": "https://media.ed.edmunds-media.com/toyota/tundra/2022/fe/2022_toyota_tundra_f34_fe_910211_1600.jpg",
+            "type": "gas",
+            "horsepower": 197,
+            "drivetrain": 4
+        },
+        {
+            "id": 28,
+            "name": "Honda Ridgeline",
+            "color": "dark gray",
+            "rent": "$59.50",
+            "image": "https://www.motortrend.com/uploads/2021/12/2022-Honda-Ridgeline-18.jpg",
+            "type": "gas",
+            "horsepower": 191,
+            "drivetrain": 4
+        },
+        {
+            "id": 29,
+            "name": "Chevrolet Impala",
+            "color": "red",
+            "rent": "$54.00",
+            "image": "https://cdn.carbuzz.com/gallery-images/840x560/631000/400/631428.jpg",
+            "type": "gas",
+            "horsepower": 198,
+            "drivetrain": 4
+        },
+        {
+            "id": 30,
+            "name": "Honda CRV",
+            "color": "red",
+            "rent": "$59.00",
+            "image": "https://media.ed.edmunds-media.com/honda/cr-v-hybrid/2020/oem/2020_honda_cr-v-hybrid_4dr-suv_touring_fq_oem_1_1600.jpg",
+            "type": "gas",
+            "horsepower": 198,
+            "drivetrain": 4
+        },
+        {
+            "id": 31,
+            "name": "Toyota Rav4",
+            "color": "white",
+            "rent": "$63.00",
+            "image": "https://i0.wp.com/www.brandcrunch.com.ng/wp-content/uploads/2021/01/20211.jpg?fit=1200%2C630&ssl=1",
+            "type": "gas",
+            "horsepower": 202,
+            "drivetrain": 4
+        },
+        {
+            "id": 32,
+            "name": "Nissan Atima",
+            "color": "dark white",
+            "rent": "$59.00",
+            "image": "https://cdn.jdpower.com/JDPA_2021%20Nissan%20Altima%20SR%20SIlver%20Front%20Quarter%20View.jpg",
+            "type": "gas",
+            "horsepower": 201,
+            "drivetrain": 4
+        },
+        {
+            "id": 33,
+            "name": "Lexus RX",
+            "color": "silver",
+            "rent": "$57.00",
+            "image": "https://cdn.motor1.com/images/mgl/lggjM/s1/lexus-rx.jpg",
+            "type": "gas",
+            "horsepower": 204,
+            "drivetrain": 4
+        },
+        {
+            "id": 34,
+            "name": "Lexus LC500",
+            "color": "dark teal",
+            "rent": "$65.00",
+            "image": "https://i.insider.com/5ffded2af3df630018cc1685?width=1136&format=jpeg",
+            "type": "gas",
+            "horsepower": 224,
+            "drivetrain": 4
         }
     ]
 }
