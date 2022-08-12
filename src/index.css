@@ -2,16 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
 body {
     margin: 0;
+    font-family: 'Quicksand';
+    overflow-x: hidden;
 }
 .hover {
     cursor: pointer;
 }
 .popup {
     width: max-content;
-    max-width: 50%;
-    background: linear-gradient(white, rgb(213, 213, 250));
+    max-width: 60%;
+    background: linear-gradient(90deg, rgb(241, 157, 157), rgb(240, 151, 151));
     padding: 1rem 2rem;
     border-radius: 20px;
     border: 5px solid rgb(102, 102, 236);
@@ -91,4 +94,8 @@ body {
         transform: translateY(0%);
         opacity: 1;
     }
+}
+
+.swiper-pagination {
+    bottom: 50px;
 }

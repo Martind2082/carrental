@@ -1,7 +1,9 @@
-import {useNavigate, useParams} from 'react-router-dom';
+import {useParams} from 'react-router-dom';
 import list from '../cars.json';
+import {useNavigate} from 'react-router-dom';
 
-const Carsinfo = ({sort}) => {
+const Carsinfo = ({sort, rating}) => {
+    let navigate = useNavigate();
     const {carslist} = list;
     const {name} = useParams();
     const array = carslist.filter(val => val.name.split(' ')[0].toLowerCase() === name);
@@ -26,7 +28,8 @@ const Carsinfo = ({sort}) => {
             <div className='grid gap-4 justify-center translate-y-[20vh]' style={{gridTemplateColumns: colsort()}}>
                 {array.map(val => <div className='hover carinfo font-bold shadow-lg pb-10 hover:shadow-2xl' key={val.id}>
                     <div className='text-2xl font-bold my-3'>{val.name}</div>
-                    <img src={val.image} className="h-[60%] w-full object-cover"/>
+                    <img onClick={() => navigate(`/car/${val.id}`)} src={val.image} className="h-[60%] w-full object-cover"/>
+                    <div className='mt-4 ml-6 flex items-center'><span className='mr-2'>Rating:</span> {rating(val.rating)}</div>
                     <div className='flex justify-around my-3'>
                         <div><span>color:</span> {val.color}</div>
                         <div><span>fuel:</span> {val.type}</div>

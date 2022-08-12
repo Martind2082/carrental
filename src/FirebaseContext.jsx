@@ -1,14 +1,16 @@
 import React from "react";
-import { auth } from "./firebase";
+import { auth, db } from "./firebase";
 import { onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { useEffect } from "react";
 import { useState } from "react";
+import { addDoc, collection } from "firebase/firestore";
 
 export const firebasecontext = React.createContext();
 
 const FirebaseContext = ({children}) => {
     const [loading, setLoading] = useState(true);
     const [user, setUser] = useState();
+    const colRef = collection(db, "names");
 
     useEffect(() => {
         const unsub = onAuthStateChanged(auth, (user) => {
@@ -17,13 +19,19 @@ const FirebaseContext = ({children}) => {
         })
         return unsub;
     })
-    function createaccount(email, password, e) {
+    function createaccount(name, email, password, e) {
         e.preventDefault();
         createUserWithEmailAndPassword(auth, email, password)
-            .catch(() => {
+            .then(() => {
+                addDoc(colRef, {
+                    email: email,
+                    name: name
+                })
+            })
+            .catch(err => {
                 let popup = document.createElement('div');
                 popup.classList.add('popup');
-                popup.textContent = 'Password should be at least 6 characters in length';
+                popup.textContent = err.toString();
                 document.body.append(popup);
                 setTimeout(() => {
                     popup.remove();
@@ -33,7 +41,15 @@ const FirebaseContext = ({children}) => {
     function login(email, password, e) {
         e.preventDefault();
         signInWithEmailAndPassword(auth, email, password)
-            .catch(err => console.log(err))
+            .catch(err => {
+                let popup = document.createElement('div');
+                popup.classList.add('popup');
+                popup.textContent = err.toString();
+                document.body.append(popup);
+                setTimeout(() => {
+                    popup.remove();
+                }, 3500);
+            })
     }
     function signout() {
         signOut(auth);

@@ -14,7 +14,7 @@ const Login = () => {
     return (
         <div>
             <img className="w-screen h-screen opacity-60" src="https://www.dollar.com/~/media/Dollar/Images/Business/Government/0618-business-government-car-tire-road.ashx"/>
-            <div className='absolute top-1/4 left-[10%] p-5 border-black border-2 bg-white'>
+            <div className='absolute top-1/4 left-[10%] p-10 border-black border-2 bg-white'>
                 <form ref={form} onSubmit={(e) => login(form.current.email.value, form.current.password.value, e)} className='font-bold text-[1.2rem]'>
                     <h1 className='text-3xl mb-3'>Log in to rent a car</h1>
                     <p className='mb-1'>Email</p>
