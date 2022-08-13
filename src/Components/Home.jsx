@@ -59,8 +59,8 @@ const Home = ({setSort, signedinuser, setsignedinuser, setUid}) => {
                     <SwiperSlide><img className='h-[100vh] w-full object-cover opacity-[0.8]' src="https://www.outsideonline.com/wp-content/uploads/2017/02/21/on-road-off-road-cars-trucks-12_h.jpg" /></SwiperSlide>
                 </Swiper>
             </main>
-            <div className='absolute left-2/4 top-1/4 translate-y-[-50%] translate-x-[-50%] flex flex-col items-center text-2xl md:text-4xl text-center z-[2]'>
-                <p>Welcome to Rent Smart{user ? ", " + signedinuser : ''}!</p>
+            <div className='absolute left-2/4 top-[35vh] translate-y-[-50%] translate-x-[-50%] flex flex-col items-center text-2xl md:text-4xl text-center z-[2] text-white font-bold w-3/4'>
+                <p>Welcome to Rent Smart{user ? ', ' + signedinuser : ''}!</p>
                 <p className='my-4'>World's best Car Rental service</p>
                 <button onClick={() => navigate('/cars')} className='hover py-3 px-12 rounded-[20px] bg-gradient-to-r from-blue-300 to-blue-400 text-xl'>Browse Cars</button>
             </div>
@@ -85,30 +85,60 @@ const Home = ({setSort, signedinuser, setsignedinuser, setUid}) => {
             </form>
 
             <div className='p-10 5'>
-                <div className='topbrands flex w-[80%] mx-auto mb-10 justify-evenly items-center'>
-                    <p className='text-3xl font-bold'>Top Brands</p>
-                    <div><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Tesla_T_symbol.svg/800px-Tesla_T_symbol.svg.png"/></div>
-                    <div><img src="https://www.freepnglogos.com/uploads/toyota-logo-png/toyota-logos-brands-10.png" /></div>
-                    <div><img src="https://allcarbrandslist.com/wp-content/uploads/2020/12/Honda-Emblem.png" /></div>
-                    <div><img src="https://www.carlogos.org/car-logos/ford-logo-2003.png"/></div>
-                    <div><img src="https://logos-world.net/wp-content/uploads/2021/04/Subaru-Logo.png" /></div>
+                <div className='topbrands flex w-[80%] mx-auto mb-10 justify-center items-center' style={{flexDirection: window.innerWidth > 900 ? 'row' : 'column'}}>
+                    <p className='text-3xl font-bold' style={{marginRight: window.innerWidth > 900 ? '3rem' : '0', marginBottom: window.innerWidth > 900 ? '0' : '1rem'}}>Top Brands</p>
+                    {
+                        window.innerWidth > 900 ? <div className='flex'>
+                            <div><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Tesla_T_symbol.svg/800px-Tesla_T_symbol.svg.png"/></div>
+                            <div><img src="https://www.freepnglogos.com/uploads/toyota-logo-png/toyota-logos-brands-10.png" /></div>
+                            <div><img src="https://allcarbrandslist.com/wp-content/uploads/2020/12/Honda-Emblem.png" /></div>
+                            <div><img src="https://www.carlogos.org/car-logos/ford-logo-2003.png"/></div>
+                            <div><img src="https://logos-world.net/wp-content/uploads/2021/04/Subaru-Logo.png" /></div>
+                        </div> : <div className='flex flex-col'>
+                            <div className='flex justify-center mb-4 w-[80vw] ml-5'>
+                                <div><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Tesla_T_symbol.svg/800px-Tesla_T_symbol.svg.png"/></div>
+                                <div><img src="https://www.freepnglogos.com/uploads/toyota-logo-png/toyota-logos-brands-10.png" /></div>
+                                <div><img src="https://allcarbrandslist.com/wp-content/uploads/2020/12/Honda-Emblem.png" /></div>
+                            </div>
+                            <div className='flex justify-center w-[80vw] ml-5'>
+                                <div><img src="https://www.carlogos.org/car-logos/ford-logo-2003.png"/></div>
+                                <div><img src="https://logos-world.net/wp-content/uploads/2021/04/Subaru-Logo.png" /></div>
+                            </div>
+                        </div>
+                    }
                 </div>
                 <p className='text-3xl font-bold text-center my-5 mt-18'>Most Rented Cars</p>
-                <Swiper id='swiper'
-                    modules={[Navigation, Pagination]}
-                    spaceBetween={0}
-                    slidesPerView={3}
-                    navigation
-                    pagination={{ clickable: true }}
-                    loop={true}
-                    >
-                    <SwiperSlide onClick={() => navigate('/car/14')}><img src={carslist[14].image}/><div className='swipertitle'>{carslist[14].name}</div></SwiperSlide>
-                    <SwiperSlide onClick={() => navigate('/car/16')}><img src={carslist[16].image} /><div className='swipertitle'>{carslist[16].name}</div></SwiperSlide>
-                    <SwiperSlide onClick={() => navigate('/car/7')}><img src={carslist[7].image} /><div className='swipertitle'>{carslist[17].name}</div></SwiperSlide>
-                    <SwiperSlide onClick={() => navigate('/car/23')}><img src={carslist[23].image} /><div className='swipertitle'>{carslist[23].name}</div></SwiperSlide>
-                    <SwiperSlide onClick={() => navigate('/car/21')}><img src={carslist[21].image} /><div className='swipertitle'>{carslist[21].name}</div></SwiperSlide>
-                    <SwiperSlide onClick={() => navigate('/car/0')}><img src={carslist[0].image} /><div className='swipertitle'>{carslist[0].name}</div></SwiperSlide>
-                </Swiper>
+                {
+                    window.innerWidth > 900 ? <Swiper id='swiper' className='shadow-xl'
+                        modules={[Navigation, Pagination]}
+                        spaceBetween={0}
+                        slidesPerView={3}
+                        navigation
+                        pagination={{ clickable: true }}
+                        loop={true}
+                        >
+                        <SwiperSlide onClick={() => navigate('/car/14')}><img src={carslist[14].image}/><div className='swipertitle'>{carslist[14].name}</div></SwiperSlide>
+                        <SwiperSlide onClick={() => navigate('/car/16')}><img src={carslist[16].image} /><div className='swipertitle'>{carslist[16].name}</div></SwiperSlide>
+                        <SwiperSlide onClick={() => navigate('/car/7')}><img src={carslist[7].image} /><div className='swipertitle'>{carslist[17].name}</div></SwiperSlide>
+                        <SwiperSlide onClick={() => navigate('/car/23')}><img src={carslist[23].image} /><div className='swipertitle'>{carslist[23].name}</div></SwiperSlide>
+                        <SwiperSlide onClick={() => navigate('/car/21')}><img src={carslist[21].image} /><div className='swipertitle'>{carslist[21].name}</div></SwiperSlide>
+                        <SwiperSlide onClick={() => navigate('/car/0')}><img src={carslist[0].image} /><div className='swipertitle'>{carslist[0].name}</div></SwiperSlide>
+                    </Swiper> : <Swiper id='swiper' className=' shadow-2xl'
+                        modules={[Navigation, Pagination]}
+                        spaceBetween={0}
+                        slidesPerView={1}
+                        navigation
+                        pagination={{ clickable: true }}
+                        loop={true}
+                        >
+                        <SwiperSlide className='' onClick={() => navigate('/car/14')}><img src={carslist[14].image}/><div className='swipertitle'>{carslist[14].name}</div></SwiperSlide>
+                        <SwiperSlide onClick={() => navigate('/car/16')}><img src={carslist[16].image} /><div className='swipertitle'>{carslist[16].name}</div></SwiperSlide>
+                        <SwiperSlide onClick={() => navigate('/car/7')}><img src={carslist[7].image} /><div className='swipertitle'>{carslist[17].name}</div></SwiperSlide>
+                        <SwiperSlide onClick={() => navigate('/car/23')}><img src={carslist[23].image} /><div className='swipertitle'>{carslist[23].name}</div></SwiperSlide>
+                        <SwiperSlide onClick={() => navigate('/car/21')}><img src={carslist[21].image} /><div className='swipertitle'>{carslist[21].name}</div></SwiperSlide>
+                        <SwiperSlide onClick={() => navigate('/car/0')}><img src={carslist[0].image} /><div className='swipertitle'>{carslist[0].name}</div></SwiperSlide>
+                    </Swiper>
+                }
             </div>
         </div>
     );

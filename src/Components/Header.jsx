@@ -53,7 +53,6 @@ const Header = ({signedinuser, uid}) => {
             editinputRef.current.style.display = 'none';
         })
     }
-
     return (
         <header className="flex justify-between items-center w-screen h-[15vh] fixed font-bold z-[10]">
             <div id="account" className='absolute top-0 right-0 w-[35%] flex flex-col items-center bg-white h-screen z-[20]' style={{transition: "all 400ms ease", visibility: accountdisplay(), transform: accounttranslate()}}>
