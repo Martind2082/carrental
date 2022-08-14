@@ -11,11 +11,10 @@ import { useState } from 'react';
 import Cars from './Components/Cars';
 import {AiFillStar, AiOutlineStar} from 'react-icons/ai'
 import Carinfo from './Components/Carinfo';
+import Garage from './Components/Garage';
 
 function App() {
   const [sort, setSort] = useState();
-  const [signedinuser, setsignedinuser] = useState();
-  const [uid, setUid] = useState();
 
   const rating = (num) => {
     if (num === 5) {
@@ -23,19 +22,21 @@ function App() {
     } else {
       return <div className='flex text-yellow-500'><AiFillStar/><AiFillStar/><AiFillStar/><AiFillStar/><AiOutlineStar/></div>
     }
-  } 
+  }
+  const [cartitems, setcartitems] = useState([]); 
   return (
     <FirebaseContext>
       <Router>
-        <Header signedinuser={signedinuser} uid={uid}/>
+        <Header/>
         <Routes>
-          <Route exact path="/" element={<Home setSort={setSort} setUid={setUid} signedinuser={signedinuser} setsignedinuser={setsignedinuser}/>}/>
+          <Route exact path="/" element={<Home setSort={setSort}/>}/>
           <Route exact path="/about" element={<About />}/>
           <Route exact path="/login" element={<Login />}/>
           <Route exact path="/createaccount" element={<Createaccount />}/>
           <Route exact path="/cars" element={<Cars rating={rating} />}/>
-          <Route exact path="/cars/:name" element={<Carsinfo sort={sort} rating={rating} />}/>
-          <Route exact path="/car/:id" element={<Carinfo rating={rating}/>}/>
+          <Route exact path="/cars/:name" element={<Carsinfo sort={sort} setSort={setSort} rating={rating} cartitems={cartitems} setcartitems={setcartitems}/>}/>
+          <Route exact path="/car/:id" element={<Carinfo rating={rating} cartitems={cartitems} setcartitems={setcartitems}/>}/>
+          <Route exact path="/garage" element={<Garage cartitems={cartitems} setcartitems={setcartitems}/>}/>
         </Routes>
       </Router>
     </FirebaseContext>

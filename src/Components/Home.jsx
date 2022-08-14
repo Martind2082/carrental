@@ -10,11 +10,10 @@ import {db} from '../firebase';
 import { useContext } from 'react';
 import {firebasecontext} from '../FirebaseContext';
 import { useEffect } from 'react';
-import { collection, onSnapshot } from 'firebase/firestore';
 
-const Home = ({setSort, signedinuser, setsignedinuser, setUid}) => {
+const Home = ({setSort}) => {
     const {carslist} = list;
-    const {user} = useContext(firebasecontext);
+    const {user, signedinuser} = useContext(firebasecontext);
     let navigate = useNavigate();
     const formRef = useRef();
     const handlesubmit = (e, name, sort) => {
@@ -25,19 +24,6 @@ const Home = ({setSort, signedinuser, setsignedinuser, setUid}) => {
         setSort(sort);
         navigate(`/cars/${name}`)
     }
-
-    useEffect(() => {
-        const unsub = onSnapshot(collection(db, "names"), snapshot => {
-            for (let i = 0; i < snapshot.docs.length; i++) {
-                if (snapshot.docs[i].data().email === user.email) {
-                    setUid(snapshot.docs[i].id);
-                    setsignedinuser(snapshot.docs[i].data().name);
-                    return;
-                }
-            }
-        })
-        return unsub;
-    }, [])
 
     return (
         <div className="overflow-x-hidden">
@@ -62,7 +48,7 @@ const Home = ({setSort, signedinuser, setsignedinuser, setUid}) => {
             <div className='absolute left-2/4 top-[35vh] translate-y-[-50%] translate-x-[-50%] flex flex-col items-center text-2xl md:text-4xl text-center z-[2] text-white font-bold w-3/4'>
                 <p>Welcome to Rent Smart{user ? ', ' + signedinuser : ''}!</p>
                 <p className='my-4'>World's best Car Rental service</p>
-                <button onClick={() => navigate('/cars')} className='hover py-3 px-12 rounded-[20px] bg-gradient-to-r from-blue-300 to-blue-400 text-xl'>Browse Cars</button>
+                <button onClick={() => navigate('/cars')} className='hover py-3 px-12 rounded-[20px] bg-gradient-to-r from-blue-300 to-blue-400 text-xl'>View Cars</button>
             </div>
             <form ref={formRef} onSubmit={(e) => handlesubmit(e, formRef.current.name.value, formRef.current.sort.value)} className="w-[70%] h-[8vh] rounded-md flex absolute top-3/4 left-1/2 translate-x-[-50%] justify-between z-[2]">
                 <select name="name" defaultValue="select" required className="w-[30%] rounded-md px-3">

@@ -1,28 +1,23 @@
 import React from "react";
 import { auth, db } from "./firebase";
 import { onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-import { useEffect } from "react";
-import { useState } from "react";
-import { addDoc, collection } from "firebase/firestore";
+import { useEffect, useState } from "react";
+import { addDoc, collection, onSnapshot } from "firebase/firestore";
 
 export const firebasecontext = React.createContext();
 
 const FirebaseContext = ({children}) => {
     const [loading, setLoading] = useState(true);
-    const [logingoogle, setlogingoogle] = useState(0);
     const [user, setUser] = useState();
+
+    const [signedinuser, setsignedinuser] = useState();
+    const [uid, setUid] = useState();
+
     const colRef = collection(db, "names");
     useEffect(() => {
         const unsub = onAuthStateChanged(auth, (user) => {
             setUser(user);
             setLoading(false);
-            if (logingoogle === 1) {
-                setlogingoogle(2);
-                addDoc(colRef, {
-                    email: user.email,
-                    name: user.displayName
-                })
-            }
         })
         return unsub;
     })
@@ -63,10 +58,33 @@ const FirebaseContext = ({children}) => {
     }
     function signinwithgoogle() {
         let provider = new GoogleAuthProvider();
-        signInWithPopup(auth, provider).then(() => setlogingoogle(1))
+        signInWithPopup(auth, provider)
     }
+    useEffect(() => {
+        const unsub = onSnapshot(collection(db, "names"), snapshot => {
+            for (let i = 0; i < snapshot.docs.length; i++) {
+                if (snapshot.docs[i].data().email === user.email) {
+                    setUid(snapshot.docs[i].id);
+                    setsignedinuser(snapshot.docs[i].data().name);
+                    return;
+                }
+            }
+            addDoc(collection(db, 'names'), {
+                email: user.email,
+                name: user.displayName
+            })
+            for (let i = 0; i < snapshot.docs.length; i++) {
+                if (snapshot.docs[i].data().email === user.email) {
+                    setUid(snapshot.docs[i].id);
+                    setsignedinuser(snapshot.docs[i].data().name);
+                    return;
+                }
+            }
+        })
+        return unsub;
+    }, [user])
     return (
-        <firebasecontext.Provider value={{user, createaccount, login, signout, signinwithgoogle}}>
+        <firebasecontext.Provider value={{user, createaccount, login, signout, signinwithgoogle, signedinuser, setsignedinuser, uid, setUid}}>
             {!loading && children}
         </firebasecontext.Provider>
     );

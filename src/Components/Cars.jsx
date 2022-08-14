@@ -37,7 +37,7 @@ const Cars = ({rating}) => {
                                         window.innerWidth > 900 ? <div className='flex'>
                                             {
                                                 obj[model].map(car => {
-                                                    return <div onClick={() => navigate(`car/${car.id}`)} key={car.name} className="w-[25%] shadow-md hover:shadow-2xl mr-8 mb-10">
+                                                    return <div onClick={() => navigate(`/car/${car.id}`)} key={car.name} className="w-[25%] shadow-md hover:shadow-2xl mr-8 mb-10">
                                                         <img className='h-[30vh] object-cover hover' src={car.image}/>
                                                         <div className='flex justify-evenly items-center py-3'>
                                                             <div className='font-bold'>{car.name}</div>

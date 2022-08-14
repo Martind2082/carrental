@@ -7,10 +7,11 @@ import { useState } from "react";
 import { db } from "../firebase";
 import { doc, updateDoc } from "firebase/firestore";
 import { useRef } from "react";
+import {GiHomeGarage} from 'react-icons/gi'
 
-const Header = ({signedinuser, uid}) => {
+const Header = () => {
     let navigate = useNavigate();
-    const {user, signout} = useContext(firebasecontext);
+    const {user, signout, signedinuser, uid} = useContext(firebasecontext);
     const [account, setAccount] = useState(false);
     const editinputRef = useRef();
     const [editing, setEditing] = useState(false);
@@ -72,6 +73,7 @@ const Header = ({signedinuser, uid}) => {
                 <Link to="/"><div className='hover:underline hover p-3'>Home</div></Link>
                 <Link to="/about"><div className='hover:underline hover p-3'>About us</div></Link>
                 <Link to="/cars"><div className='hover:underline hover p-3'>Cars</div></Link>
+                <Link to="/garage"><GiHomeGarage className="hover text-[3rem]" style={{padding: '3'}}/></Link>
                 <div onClick={loginclick} className='hover:underline hover p-3'>{user ? 'Account' : 'Login | Sign up'}</div>
             </div>
         </header>
