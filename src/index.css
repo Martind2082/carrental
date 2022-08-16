@@ -3,10 +3,13 @@
 @tailwind utilities;
 
 @import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
-body {
+body, html {
     margin: 0;
     font-family: 'Quicksand';
     overflow-x: hidden;
+}
+html {
+    overflow: hidden;
 }
 .hover {
     cursor: pointer;
@@ -81,6 +84,7 @@ body {
     background-image: url("https://images.unsplash.com/photo-1536196000545-2293bf37f22f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1888&q=80");
     background-position: center;
     background-size: cover;
+    opacity: 1
 }
 .aboutanimation {
     animation: about 1000ms ease;
@@ -99,3 +103,4 @@ body {
 .swiper-pagination {
     bottom: 50px;
 }
+

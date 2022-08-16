@@ -1,10 +1,11 @@
-import { useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import {useNavigate} from 'react-router-dom';
 
 const Garage = ({cartitems, setcartitems}) => {
     let width = window.innerWidth;
     let navigate = useNavigate();
     const [totaldays, settotaldays] = useState(1);
+    const [dates, setdates] = useState({date1: '', date2: ''});
     const pickupdateref = useRef();
     const pickuptimeref = useRef();
     const dropoffdateref = useRef();
@@ -16,6 +17,23 @@ const Garage = ({cartitems, setcartitems}) => {
     const removeallclick = () => {
         setcartitems([]);
     }
+    useEffect(() => {
+        if (dates.date1 && dates.date2) {
+            let date1 = dates.date1.split('-');
+            const year1 = date1[0];
+            date1.splice(0, 1);
+            date1.push(year1);
+            date1 = new Date(date1.join('-'));
+            let date2 = dates.date2.split('-');
+            const year2 = date2[0];
+            date2.splice(0, 1);
+            date2.push(year2);
+            date2 = new Date(date2.join('-'));
+            let milsec = date2 - date1;
+            let days = Math.ceil(milsec / (1000 * 60 * 60 * 24));
+            settotaldays(days);
+        }
+    }, [dates])
     const total = useMemo(() => {
         let totalprice = 0;
         cartitems.forEach(item => {
@@ -38,7 +56,16 @@ const Garage = ({cartitems, setcartitems}) => {
             }, 3200);
             return;
         }
-        console.log(pickupdateref.current.value);
+        if (totaldays < 0) {
+            let div = document.createElement('div');
+            div.textContent = 'Pickup date must occur before dropoff date';
+            div.classList.add('popup');
+            document.body.append(div);
+            setTimeout(() => {
+                div.remove();
+            }, 3200);
+            return;
+        };
     }
     return (
         <div className="translate-y-[6rem] w-[90%] m-auto">
@@ -70,7 +97,7 @@ const Garage = ({cartitems, setcartitems}) => {
                         <div className='flex justify-between'style={{flexDirection: width > 1000 ? 'row' : 'column'}}>
                             <div className='flex flex-col'>
                                 <p className='font-bold'>Pickup Date</p>
-                                <input ref={pickupdateref} className='border border-black text-lg' type="date"/>
+                                <input ref={pickupdateref} onChange={(e) => setdates({...dates, date1: e.target.value,})} className='border border-black text-lg' type="date"/>
                             </div>
                             <div className='flex flex-col'>
                                 <p className='font-bold'>Pickup Time</p>
@@ -98,7 +125,7 @@ const Garage = ({cartitems, setcartitems}) => {
                         <div className='flex justify-between mt-2 mb-3' style={{flexDirection: width > 1000 ? 'row' : 'column'}}>
                             <div className='flex flex-col'>
                                 <p className='font-bold'>Dropoff Date</p>
-                                <input ref={dropoffdateref} className='border border-black text-lg' type="date"/>
+                                <input ref={dropoffdateref} onChange={(e) => setdates({...dates, date2: e.target.value})} className='border border-black text-lg' type="date"/>
                             </div>
                             <div className='flex flex-col'>
                                 <p className='font-bold'>Dropoff Time</p>
