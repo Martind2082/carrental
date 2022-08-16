@@ -74,7 +74,7 @@ const Carinfo = ({rating, setcartitems, cartitems}) => {
                     </div> : <Swiper className='h-[30vh]'
                     modules={[Navigation, Pagination]}
                     spaceBetween={0}
-                    slidesPerView={3}
+                    slidesPerView={width > 900 ? '3' : '1'}
                     navigation
                     pagination={{ clickable: true }}
                     loop={true}

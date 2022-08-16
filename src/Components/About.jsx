@@ -3,8 +3,8 @@ import {FaAward, FaBolt, FaTags} from "react-icons/fa"
 const About = () => {
     let width = window.innerWidth;
     return (
-        <div id="about" className="w-screen h-screen">
-            <div className="absolute aboutanimation flex flex-col text-center text-white top-[22vh]" style={{width: width > 900 ? '50%' : '100%'}}>
+        <div id="about" className="h-screen w-full overflow-x-hidden">
+            <div className="absolute aboutanimation flex flex-col text-center text-white top-[22vh] px-8" style={{width: width > 900 ? '50%' : '100%'}}>
                 <p className="text-3xl lg:text-4xl mb-10">Who we are</p>
                 <p className="text-2xl lg:text-3xl">Rent Smart is one of America's best car rental companies. Our plan is to make renting cars as efficient and easy as possible with the best quality and prices for our customers.</p>
                 <div className="flex justify-around">

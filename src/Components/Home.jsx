@@ -26,7 +26,7 @@ const Home = ({setSort}) => {
     }
 
     return (
-        <div className="overflow-x-hidden">
+        <div>
             <main className="w-screen h-[100vh]">
                <Swiper
                     modules={[Autoplay]}

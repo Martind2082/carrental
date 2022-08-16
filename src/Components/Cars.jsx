@@ -5,11 +5,9 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import {useNavigate} from 'react-router-dom'
-import { useState } from 'react';
 
 const Cars = ({rating}) => {
     let navigate = useNavigate();
-    const [count, setCount] = useState(false);
     const {carslist} = list;
     let obj = {};
     for (let i = 0; i < carslist.length; i++) {

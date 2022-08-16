@@ -1,15 +1,17 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import {useNavigate} from 'react-router-dom';
+import {BsXLg} from 'react-icons/bs'
+import {FaCreditCard, FaPaypal} from 'react-icons/fa'
 
 const Garage = ({cartitems, setcartitems}) => {
     let width = window.innerWidth;
     let navigate = useNavigate();
     const [totaldays, settotaldays] = useState(1);
     const [dates, setdates] = useState({date1: '', date2: ''});
-    const pickupdateref = useRef();
+    const [datesinfo, setdatesinfo] = useState({di1: '', di2: ''});
     const pickuptimeref = useRef();
-    const dropoffdateref = useRef();
     const dropofftimeref = useRef();
+    const paymentref = useRef();
     const removeclick = (item) => {
         let newcartitems = cartitems.filter(car => car !== item);
         setcartitems(newcartitems);
@@ -29,6 +31,7 @@ const Garage = ({cartitems, setcartitems}) => {
             date2.splice(0, 1);
             date2.push(year2);
             date2 = new Date(date2.join('-'));
+            setdatesinfo({di1: date1, di2: date2});
             let milsec = date2 - date1;
             let days = Math.ceil(milsec / (1000 * 60 * 60 * 24));
             settotaldays(days);
@@ -46,7 +49,7 @@ const Garage = ({cartitems, setcartitems}) => {
         return '$' + totalprice;
     }, [cartitems, totaldays])
     const proceedcheckout = () => {
-        if (pickupdateref.current.value === '' || pickuptimeref.current.value === '' || dropoffdateref.current.value === '' || dropofftimeref.current.value === '') {
+        if (!dates.date1 || pickuptimeref.current.value === '' || !dates.date2 || dropofftimeref.current.value === '') {
             let div = document.createElement('div');
             div.classList.add('popup');
             div.textContent = 'Please answer all fields';
@@ -66,9 +69,72 @@ const Garage = ({cartitems, setcartitems}) => {
             }, 3200);
             return;
         };
+        paymentref.current.style.display = 'flex';
     }
     return (
         <div className="translate-y-[6rem] w-[90%] m-auto">
+            <div ref={paymentref} className='fixed flex-col px-8 hidden h-[70vh] rounded-[30px] left-2/4 top-[60%] -translate-x-2/4 -translate-y-2/4 border-2 border-gray-500 bg-white' style={{width: width > 900 ? '50%' : '90%', zIndex: '50'}}>
+                <div className='flex text-3xl justify-between w-full mt-2'>
+                    <p className='font-bold'>Payment Info</p>
+                    <BsXLg className='hover' onClick={() => paymentref.current.style.display = 'none'}/>
+                </div>
+                <div className='flex flex-col mt-4 text-xl'>
+                    <p>Payment Method:</p>
+                    <div className='flex items-center'>
+                        <input type="radio" name="paytype"/>
+                        <FaCreditCard className='mx-2'/>
+                        <p>Card</p>
+                    </div>
+                    <div className='flex items-center'>
+                        <input type="radio" name="paytype"/>
+                        <FaPaypal className='mx-2'/>
+                        <p>Paypall</p>
+                    </div>
+                </div>
+                <div className='my-3'>
+                    <p>Name on Card:</p>
+                    <input className='border border-black rounded-[10px] px-2 ' type="text" />
+                </div>
+                <div>
+                    <p>Card Number:</p>
+                    <input className='border border-black rounded-[10px] px-2 ' type="number" />
+                </div>
+                <div className='my-3'>
+                    <div>Expiration Date:</div>
+                    <div className='flex'>
+                        <select className='border border-black rounded-[5px] mr-4'>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                            <option>9</option>
+                            <option>10</option>
+                            <option>11</option>
+                            <option>12</option>
+                        </select>
+                        <select className='border border-black rounded-[5px]'>
+                            <option value={new Date().getFullYear()}>{new Date().getFullYear()}</option>
+                            <option value={new Date().getFullYear() + 1}>{new Date().getFullYear() + 1}</option>
+                            <option value={new Date().getFullYear() + 2}>{new Date().getFullYear() + 2}</option>
+                            <option value={new Date().getFullYear() + 3}>{new Date().getFullYear() + 3}</option>
+                            <option value={new Date().getFullYear() + 4}>{new Date().getFullYear() + 4}</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <p>CVV:</p>
+                    <input type="number" className='border border-black rounded-[10px] px-2'/>
+                </div>
+                <div className='font-bold'>Renting {cartitems.length} {cartitems.length === 1 ? 'car':'cars'} for {totaldays} {totaldays === 1 ? 'day':'days'}</div>
+                <div>
+                    pickup: <div>{datesinfo.di1.toString().split(' ').slice(0, 3)} at {pickuptimeref.current.value}</div>
+                    dropoff: <div>{datesinfo.di2.toString().split(' ').slice(0, 3)} at {dropofftimeref.current.value}</div>
+                </div>
+            </div>
             <div className="text-3xl font-bold">{cartitems.length === 0 ? 'Garage' : <div className='mb-8'>
                     <p>Cars</p>
                     <p onClick={removeallclick} className='text-red-400 hover hover:underline text-xl font-normal'>Remove all Cars</p>
@@ -97,7 +163,7 @@ const Garage = ({cartitems, setcartitems}) => {
                         <div className='flex justify-between'style={{flexDirection: width > 1000 ? 'row' : 'column'}}>
                             <div className='flex flex-col'>
                                 <p className='font-bold'>Pickup Date</p>
-                                <input ref={pickupdateref} onChange={(e) => setdates({...dates, date1: e.target.value,})} className='border border-black text-lg' type="date"/>
+                                <input onChange={(e) => setdates({...dates, date1: e.target.value,})} className='border border-black text-lg' type="date"/>
                             </div>
                             <div className='flex flex-col'>
                                 <p className='font-bold'>Pickup Time</p>
@@ -125,7 +191,7 @@ const Garage = ({cartitems, setcartitems}) => {
                         <div className='flex justify-between mt-2 mb-3' style={{flexDirection: width > 1000 ? 'row' : 'column'}}>
                             <div className='flex flex-col'>
                                 <p className='font-bold'>Dropoff Date</p>
-                                <input ref={dropoffdateref} onChange={(e) => setdates({...dates, date2: e.target.value})} className='border border-black text-lg' type="date"/>
+                                <input onChange={(e) => setdates({...dates, date2: e.target.value})} className='border border-black text-lg' type="date"/>
                             </div>
                             <div className='flex flex-col'>
                                 <p className='font-bold'>Dropoff Time</p>
