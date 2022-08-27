@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import {useNavigate} from 'react-router-dom';
 import {BsXLg} from 'react-icons/bs'
 import {FaCreditCard, FaPaypal} from 'react-icons/fa'
+import thankyoupic from '../Images/thankyou.png'
 
 const Garage = ({cartitems, setcartitems}) => {
     let width = window.innerWidth;
@@ -9,9 +10,10 @@ const Garage = ({cartitems, setcartitems}) => {
     const [totaldays, settotaldays] = useState(1);
     const [dates, setdates] = useState({date1: '', date2: ''});
     const [datesinfo, setdatesinfo] = useState({di1: '', di2: ''});
-    const pickuptimeref = useRef();
-    const dropofftimeref = useRef();
     const paymentref = useRef();
+    const [purchased, setpurchased] = useState(false);
+    const [pickuptime, setpickuptime] = useState('');
+    const [dropofftime, setdropofftime] = useState('');
     const removeclick = (item) => {
         let newcartitems = cartitems.filter(car => car !== item);
         setcartitems(newcartitems);
@@ -49,7 +51,7 @@ const Garage = ({cartitems, setcartitems}) => {
         return '$' + totalprice;
     }, [cartitems, totaldays])
     const proceedcheckout = () => {
-        if (!dates.date1 || pickuptimeref.current.value === '' || !dates.date2 || dropofftimeref.current.value === '') {
+        if (!dates.date1 || pickuptime === '' || !dates.date2 || dropofftime === '') {
             let div = document.createElement('div');
             div.classList.add('popup');
             div.textContent = 'Please answer all fields';
@@ -71,79 +73,108 @@ const Garage = ({cartitems, setcartitems}) => {
         };
         paymentref.current.style.display = 'flex';
     }
+    const confirmpurchase = () => {
+        setpurchased(true);
+    }
+    const okayclick = () => {
+        setpurchased(false);
+        paymentref.current.style.display = 'none';
+        setcartitems([]);
+    }
+    const purchasehistoryclick = () => {
+
+    }
     return (
         <div className="translate-y-[6rem] w-[90%] m-auto">
-            <div ref={paymentref} className='fixed flex-col px-8 hidden h-[70vh] rounded-[30px] left-2/4 top-[60%] -translate-x-2/4 -translate-y-2/4 border-2 border-gray-500 bg-white' style={{width: width > 900 ? '50%' : '90%', zIndex: '50'}}>
-                <div className='flex text-3xl justify-between w-full mt-2'>
-                    <p className='font-bold'>Payment Info</p>
-                    <BsXLg className='hover' onClick={() => paymentref.current.style.display = 'none'}/>
-                </div>
-                <div className='flex flex-col mt-4 text-xl'>
-                    <p>Payment Method:</p>
-                    <div className='flex items-center'>
-                        <input type="radio" name="paytype"/>
-                        <FaCreditCard className='mx-2'/>
-                        <p>Card</p>
+            <div ref={paymentref} className='fixed left-2/4 top-[0%] -translate-x-2/4 px-8 py-4 hidden rounded-[30px] border-2 border-gray-500 bg-white' style={{width: width > 900 ? '50%' : '90%', zIndex: '50'}}>
+                {
+                    purchased ? <div className='flex flex-col items-center justify-center mx-auto'>
+                        <p className='text-xl font-bold text-center'>Thank you for your purchase!</p>
+                        <img className='h-[70%]' src={thankyoupic}/>
+                        <button onClick={okayclick} className='w-[80%] mx-auto my-4 text-base py-2 bg-gradient-to-r from-blue-400 to-blue-500 font-bold text-white rounded-[20px]'>Okay</button>
+                    </div> : <div className='flex-col mx-auto'>
+                        <div className='flex text-3xl justify-between w-full mt-2'>
+                        <p className='font-bold'>Payment Info</p>
+                        <BsXLg className='hover' onClick={() => paymentref.current.style.display = 'none'}/>
                     </div>
-                    <div className='flex items-center'>
-                        <input type="radio" name="paytype"/>
-                        <FaPaypal className='mx-2'/>
-                        <p>Paypall</p>
+                    <div className='flex' style={{flexDirection: width > 900 ? 'row': 'column'}}>
+                        <div className='flex flex-col mt-4 text-xl'>
+                            <p>Payment Method:</p>
+                            <div className='flex items-center'>
+                                <input type="radio" name="paytype"/>
+                                <FaCreditCard className='mx-2'/>
+                                <p>Card</p>
+                            </div>
+                            <div className='flex items-center'>
+                                <input type="radio" name="paytype"/>
+                                <FaPaypal className='mx-2'/>
+                                <p>Paypall</p>
+                            </div>
+                        </div>
+                        <div style={{marginLeft: width > 900 ? '4rem': '0'}}>
+                            <div className='my-3'>
+                                <p>Name on Card:</p>
+                                <input className='border border-black rounded-[10px] px-2 ' type="text" />
+                            </div>
+                            <div>
+                                <p>Card Number:</p>
+                                <input className='border border-black rounded-[10px] px-2 ' type="number" />
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div className='my-3'>
-                    <p>Name on Card:</p>
-                    <input className='border border-black rounded-[10px] px-2 ' type="text" />
-                </div>
-                <div>
-                    <p>Card Number:</p>
-                    <input className='border border-black rounded-[10px] px-2 ' type="number" />
-                </div>
-                <div className='my-3'>
-                    <div>Expiration Date:</div>
-                    <div className='flex'>
-                        <select className='border border-black rounded-[5px] mr-4'>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                            <option>6</option>
-                            <option>7</option>
-                            <option>8</option>
-                            <option>9</option>
-                            <option>10</option>
-                            <option>11</option>
-                            <option>12</option>
-                        </select>
-                        <select className='border border-black rounded-[5px]'>
-                            <option value={new Date().getFullYear()}>{new Date().getFullYear()}</option>
-                            <option value={new Date().getFullYear() + 1}>{new Date().getFullYear() + 1}</option>
-                            <option value={new Date().getFullYear() + 2}>{new Date().getFullYear() + 2}</option>
-                            <option value={new Date().getFullYear() + 3}>{new Date().getFullYear() + 3}</option>
-                            <option value={new Date().getFullYear() + 4}>{new Date().getFullYear() + 4}</option>
-                        </select>
+                    <div className='flex' style={{flexDirection: width > 900 ? 'row': 'column', alignItems: width > 900 ? 'center' : 'start'}}>
+                        <div className='my-3'>
+                            <div>Expiration Date:</div>
+                            <div className='flex'>
+                                <select className='border border-black rounded-[5px] mr-4'>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                    <option>7</option>
+                                    <option>8</option>
+                                    <option>9</option>
+                                    <option>10</option>
+                                    <option>11</option>
+                                    <option>12</option>
+                                </select>
+                                <select className='border border-black rounded-[5px]'>
+                                    <option value={new Date().getFullYear()}>{new Date().getFullYear()}</option>
+                                    <option value={new Date().getFullYear() + 1}>{new Date().getFullYear() + 1}</option>
+                                    <option value={new Date().getFullYear() + 2}>{new Date().getFullYear() + 2}</option>
+                                    <option value={new Date().getFullYear() + 3}>{new Date().getFullYear() + 3}</option>
+                                    <option value={new Date().getFullYear() + 4}>{new Date().getFullYear() + 4}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div style={{marginLeft: width > 900 ? '4.8rem' : '0'}}>
+                            <p>CVV:</p>
+                            <input type="number" className='border border-black rounded-[10px] px-2'/>
+                        </div>
                     </div>
-                </div>
-                <div>
-                    <p>CVV:</p>
-                    <input type="number" className='border border-black rounded-[10px] px-2'/>
-                </div>
-                <div className='font-bold'>Renting {cartitems.length} {cartitems.length === 1 ? 'car':'cars'} for {totaldays} {totaldays === 1 ? 'day':'days'}</div>
-                <div>
-                    pickup: <div>{datesinfo.di1.toString().split(' ').slice(0, 3)} at {pickuptimeref.current.value}</div>
-                    dropoff: <div>{datesinfo.di2.toString().split(' ').slice(0, 3)} at {dropofftimeref.current.value}</div>
-                </div>
+                    <div className='font-bold mt-4'>Renting {cartitems.length} {cartitems.length === 1 ? 'car':'cars'} for {totaldays} {totaldays === 1 ? 'day':'days'}</div>
+                    <div>
+                        <div className='flex my-2'>Pickup: <div className='ml-3'>{datesinfo.di1.toString().split(' ').slice(0, 3).join(' ')} at {pickuptime}</div></div>
+                        <div className='flex'>Dropoff: <div className='ml-3'>{datesinfo.di2.toString().split(' ').slice(0, 3).join(' ')} at {dropofftime}</div></div>
+                    </div>
+                    <button onClick={confirmpurchase} className='w-[80%] mx-auto my-4 text-base py-2 bg-gradient-to-r from-blue-400 to-blue-500 font-bold text-white rounded-[20px]'>Confirm purchase</button>
+                    <div className='font-bold text-red-500 mx-auto'>*No need to type anything. Just press confirm purchase*</div>
+                    </div>
+                }
             </div>
-            <div className="text-3xl font-bold">{cartitems.length === 0 ? 'Garage' : <div className='mb-8'>
+            <div className="text-3xl font-bold flex justify-between">{cartitems.length === 0 ? <div>Garage</div> : <div className='mb-8'>
                     <p>Cars</p>
                     <p onClick={removeallclick} className='text-red-400 hover hover:underline text-xl font-normal'>Remove all Cars</p>
-                </div>}</div>
+                    </div>}
+                    <div onClick={purchasehistoryclick} className='hover:cursor-pointer text-white bg-gradient-to-r from-blue-400 to-blue-500 py-3 px-20 rounded-[20px] font-normal text-xl'>Purchase History</div>
+                </div>
             {
                 cartitems.length === 0 ? <div className="w-full flex flex-col items-center translate-y-[-10%]">
                     <img src="https://cdni.iconscout.com/illustration/premium/thumb/empty-inbox-4790940-3989293.png"/>
-                    <p className="text-2xl font-bold">You currently have no cars in your garage</p>
-                    <p className="text-2xl font-bold my-4">Cars you rent will appear here</p>
+                    <p className="text-2xl font-bold text-center">You currently have no cars in your garage</p>
+                    <p className="text-2xl font-bold my-4 text-center">Cars you rent will appear here</p>
                     <button onClick={() => navigate('/cars')} className="hover py-2 px-8 rounded-[20px] bg-gradient-to-r from-blue-300 to-blue-400 text-2xl text-white font-bold">View Cars</button>
                 </div> : <div className='flex justify-between' style={{flexDirection: width > 900 ? 'row' : 'column'}}>
                     <div style={{width: width > 900 ? '55%' : '100%'}}>
@@ -167,24 +198,24 @@ const Garage = ({cartitems, setcartitems}) => {
                             </div>
                             <div className='flex flex-col'>
                                 <p className='font-bold'>Pickup Time</p>
-                                <select ref={pickuptimeref} defaultValue="select" className='text-lg border border-black'>
+                                <select onChange={(e) => setpickuptime(e.target.value)} defaultValue="select" className='text-lg border border-black'>
                                     <option value="select" disabled>SELECT</option>
-                                    <option value="7a">7:00 AM</option>
-                                    <option value="8a">8:00 AM</option>
-                                    <option value="9a">9:00 AM</option>
-                                    <option value="10a">10:00 AM</option>
-                                    <option value="11a">11:00 AM</option>
-                                    <option value="12p">12:00 PM</option>
-                                    <option value="1p">1:00 PM</option>
-                                    <option value="2p">2:00 PM</option>
-                                    <option value="3p">3:00 PM</option>
-                                    <option value="4p">4:00 PM</option>
-                                    <option value="5p">5:00 PM</option>
-                                    <option value="6p">6:00 PM</option>
-                                    <option value="7p">7:00 PM</option>
-                                    <option value="8p">8:00 PM</option>
-                                    <option value="9p">9:00 PM</option>
-                                    <option value="10p">10:00 PM</option>
+                                    <option value="7:00 am">7:00 AM</option>
+                                    <option value="8:00 am">8:00 AM</option>
+                                    <option value="9:00 am">9:00 AM</option>
+                                    <option value="10:00 am">10:00 AM</option>
+                                    <option value="11:00 am">11:00 AM</option>
+                                    <option value="12:00 pm">12:00 PM</option>
+                                    <option value="1:00 pm">1:00 PM</option>
+                                    <option value="2:00 pm">2:00 PM</option>
+                                    <option value="3:00 pm">3:00 PM</option>
+                                    <option value="4:00 pm">4:00 PM</option>
+                                    <option value="5:00 pm">5:00 PM</option>
+                                    <option value="6:00 pm">6:00 PM</option>
+                                    <option value="7:00 pm">7:00 PM</option>
+                                    <option value="8:00 pm">8:00 PM</option>
+                                    <option value="9:00 pm">9:00 PM</option>
+                                    <option value="10:00 pm">10:00 PM</option>
                                 </select>
                             </div>
                         </div>
@@ -195,24 +226,24 @@ const Garage = ({cartitems, setcartitems}) => {
                             </div>
                             <div className='flex flex-col'>
                                 <p className='font-bold'>Dropoff Time</p>
-                                <select ref={dropofftimeref} defaultValue="select" className='text-lg border border-black'>
-                                    <option value="select" disabled>SELECT</option>
-                                    <option value="7a">7:00 AM</option>
-                                    <option value="8a">8:00 AM</option>
-                                    <option value="9a">9:00 AM</option>
-                                    <option value="10a">10:00 AM</option>
-                                    <option value="11a">11:00 AM</option>
-                                    <option value="12p">12:00 PM</option>
-                                    <option value="1p">1:00 PM</option>
-                                    <option value="2p">2:00 PM</option>
-                                    <option value="3p">3:00 PM</option>
-                                    <option value="4p">4:00 PM</option>
-                                    <option value="5p">5:00 PM</option>
-                                    <option value="6p">6:00 PM</option>
-                                    <option value="7p">7:00 PM</option>
-                                    <option value="8p">8:00 PM</option>
-                                    <option value="9p">9:00 PM</option>
-                                    <option value="10p">10:00 PM</option>
+                                <select onChange={(e) => setdropofftime(e.target.value)} defaultValue="select" className='text-lg border border-black'>
+                                <option value="select" disabled>SELECT</option>
+                                    <option value="7:00 am">7:00 AM</option>
+                                    <option value="8:00 am">8:00 AM</option>
+                                    <option value="9:00 am">9:00 AM</option>
+                                    <option value="10:00 am">10:00 AM</option>
+                                    <option value="11:00 am">11:00 AM</option>
+                                    <option value="12:00 pm">12:00 PM</option>
+                                    <option value="1:00 pm">1:00 PM</option>
+                                    <option value="2:00 pm">2:00 PM</option>
+                                    <option value="3:00 pm">3:00 PM</option>
+                                    <option value="4:00 pm">4:00 PM</option>
+                                    <option value="5:00 pm">5:00 PM</option>
+                                    <option value="6:00 pm">6:00 PM</option>
+                                    <option value="7:00 pm">7:00 PM</option>
+                                    <option value="8:00 pm">8:00 PM</option>
+                                    <option value="9:00 pm">9:00 PM</option>
+                                    <option value="10:00 pm">10:00 PM</option>
                                 </select>
                             </div>
                         </div>
