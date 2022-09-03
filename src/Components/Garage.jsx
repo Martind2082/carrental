@@ -111,9 +111,7 @@ const Garage = ({cartitems, setcartitems}) => {
         updateDoc(doc(db, 'names', uid), {
             purchasehistory: ""
         })
-        for (let i = 0; i < document.getElementById('purchasehistorycontainer').children.length; i++) {
-            document.getElementById('purchasehistorycontainer').children[i].remove();
-        }
+        document.getElementById('purchasehistorycontainer').innerHTML = '';
     }
     return (
         <div className="translate-y-[6rem] w-[90%] m-auto">
