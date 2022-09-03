@@ -1,5 +1,5 @@
 import { useContext, useEffect, useMemo, useRef, useState } from 'react';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, Link} from 'react-router-dom';
 import {BsXLg} from 'react-icons/bs'
 import {FaCreditCard, FaPaypal} from 'react-icons/fa'
 import thankyoupic from '../Images/thankyou.png'
@@ -13,7 +13,7 @@ const Garage = ({cartitems, setcartitems}) => {
     let width = window.innerWidth;
     let navigate = useNavigate();
     const purchasehistoryref = useRef();
-    const {uid, purchasehistory, setpurchasehistory} = useContext(firebasecontext);
+    const {uid, purchasehistory} = useContext(firebasecontext);
     let purchasehistoryarray = purchasehistory.split(',');
     const [totaldays, settotaldays] = useState(1);
     const [dates, setdates] = useState({date1: '', date2: ''});
@@ -89,7 +89,11 @@ const Garage = ({cartitems, setcartitems}) => {
         paymentref.current.style.display = 'none';
         let cartitemids = cartitems.map(obj => obj.id);
         cartitemids = cartitemids.join(',')
-        let newpurchasehistory = (purchasehistory + ',' + cartitemids).join(',').slice(1);
+        let newpurchasehistory = (purchasehistory + ',' + cartitemids).split(',');
+        if (newpurchasehistory[0] === '') {
+            newpurchasehistory.splice(0, 1);
+        }
+        newpurchasehistory = newpurchasehistory.join(',');
         updateDoc(doc(db, 'names', uid), {
             purchasehistory: newpurchasehistory,
             garageitems: ""
@@ -101,6 +105,14 @@ const Garage = ({cartitems, setcartitems}) => {
             purchasehistoryref.current.style.display = 'none';
         } else {
             purchasehistoryref.current.style.display = 'block';
+        }
+    }
+    const clearpurchasehistory = () => {
+        updateDoc(doc(db, 'names', uid), {
+            purchasehistory: ""
+        })
+        for (let i = 0; i < document.getElementById('purchasehistorycontainer').children.length; i++) {
+            document.getElementById('purchasehistorycontainer').children[i].remove();
         }
     }
     return (
@@ -189,13 +201,17 @@ const Garage = ({cartitems, setcartitems}) => {
                 </div>}
                 <div onClick={purchasehistoryclick} className='text-white hover z-[1] hover:bg-red-400 bg-gradient-to-r from-blue-400 to-blue-500 py-3 px-20 rounded-[20px] font-normal text-xl h-full'>Purchase History</div>
             </div>
-            <div ref={purchasehistoryref} className="z-[1] overflow-auto hidden rounded-[15px] border-2 border-blue-500 fixed w-[80%] h-[60vh] left-[50%] right-[50%] translate-x-[-50%] bg-white">
+            <div ref={purchasehistoryref} className="z-[1] pb-8 overflow-auto hidden rounded-[15px] border-2 border-blue-500 fixed w-[80%] h-[60vh] left-[50%] right-[50%] translate-x-[-50%] bg-white">
+                <div onClick={clearpurchasehistory} className='hover:underline hover text-red-300 absolute top-[0.7rem] left-[1.5rem] font-bold text-[1.2rem]'>Clear history</div>
+                <BsXLg className='hover absolute right-[1.5rem] top-[1rem] text-2xl' onClick={() => purchasehistoryref.current.style.display = 'none'}/>
                 <p className='text-center text-[2rem] my-2'>Purchase History</p>
-                {purchasehistoryarray.toString().length !== 0 ? purchasehistoryarray.map(num => <div key={num} className="flex h-[20%] border-b-gray-500 border-b-[1.5px]">
-                    <img className='w-[25%] object-cover' src={carslist[num].image}/>
-                    <div className='font-bold ml-4 mt-2'>{carslist[num].name}</div>
-                    <div className='font-bold text-right w-full absolute translate-x-[-5%] mt-2'>{carslist[num].rent} per day</div>
-                </div>): ''}
+                <div id="purchasehistorycontainer">
+                    {purchasehistoryarray.toString().length !== 0 ? purchasehistoryarray.map(num => <div key={num} className="flex h-[20%] border-b-gray-500 border-b-[1.5px]">
+                        <img onClick={() => navigate(`/car/${num}`)} className='hover w-[25%] object-cover' src={carslist[num].image}/>
+                        <div className='font-bold ml-4 mt-2'>{carslist[num].name}</div>
+                        <div className='font-bold text-right w-full absolute translate-x-[-5%] mt-2'>{carslist[num].rent} per day</div>
+                    </div>): ''}
+                </div>
             </div>
             {
                 cartitems.length === 0 ? <div className="w-full flex flex-col items-center translate-y-[-10%]">
