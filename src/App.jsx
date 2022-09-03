@@ -25,7 +25,7 @@ function App() {
   }
   const [cartitems, setcartitems] = useState([]); 
   return (
-    <FirebaseContext>
+    <FirebaseContext setcartitems={setcartitems} cartitems={cartitems}>
       <Router>
         <Header/>
         <Routes>

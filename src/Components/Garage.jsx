@@ -1,12 +1,20 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useContext, useEffect, useMemo, useRef, useState } from 'react';
 import {useNavigate} from 'react-router-dom';
 import {BsXLg} from 'react-icons/bs'
 import {FaCreditCard, FaPaypal} from 'react-icons/fa'
 import thankyoupic from '../Images/thankyou.png'
+import { doc, updateDoc } from 'firebase/firestore';
+import { db } from '../firebase';
+import { firebasecontext } from '../FirebaseContext';
+import list from '../cars.json';
 
 const Garage = ({cartitems, setcartitems}) => {
+    const {carslist} = list;
     let width = window.innerWidth;
     let navigate = useNavigate();
+    const purchasehistoryref = useRef();
+    const {uid, purchasehistory, setpurchasehistory} = useContext(firebasecontext);
+    let purchasehistoryarray = purchasehistory.split(',');
     const [totaldays, settotaldays] = useState(1);
     const [dates, setdates] = useState({date1: '', date2: ''});
     const [datesinfo, setdatesinfo] = useState({di1: '', di2: ''});
@@ -79,10 +87,21 @@ const Garage = ({cartitems, setcartitems}) => {
     const okayclick = () => {
         setpurchased(false);
         paymentref.current.style.display = 'none';
+        let cartitemids = cartitems.map(obj => obj.id);
+        cartitemids = cartitemids.join(',')
+        let newpurchasehistory = (purchasehistory + ',' + cartitemids).join(',').slice(1);
+        updateDoc(doc(db, 'names', uid), {
+            purchasehistory: newpurchasehistory,
+            garageitems: ""
+        })
         setcartitems([]);
     }
     const purchasehistoryclick = () => {
-
+        if (purchasehistoryref.current.style.display === 'block') {
+            purchasehistoryref.current.style.display = 'none';
+        } else {
+            purchasehistoryref.current.style.display = 'block';
+        }
     }
     return (
         <div className="translate-y-[6rem] w-[90%] m-auto">
@@ -165,11 +184,19 @@ const Garage = ({cartitems, setcartitems}) => {
                 }
             </div>
             <div className="text-3xl font-bold flex justify-between">{cartitems.length === 0 ? <div>Garage</div> : <div className='mb-8'>
-                    <p>Cars</p>
-                    <p onClick={removeallclick} className='text-red-400 hover hover:underline text-xl font-normal'>Remove all Cars</p>
-                    </div>}
-                    <div onClick={purchasehistoryclick} className='hover:cursor-pointer text-white bg-gradient-to-r from-blue-400 to-blue-500 py-3 px-20 rounded-[20px] font-normal text-xl'>Purchase History</div>
-                </div>
+                <p>Cars</p>
+                <p onClick={removeallclick} className='text-red-400 hover hover:underline text-xl font-normal'>Remove all Cars</p>
+                </div>}
+                <div onClick={purchasehistoryclick} className='text-white hover z-[1] hover:bg-red-400 bg-gradient-to-r from-blue-400 to-blue-500 py-3 px-20 rounded-[20px] font-normal text-xl h-full'>Purchase History</div>
+            </div>
+            <div ref={purchasehistoryref} className="z-[1] overflow-auto hidden rounded-[15px] border-2 border-blue-500 fixed w-[80%] h-[60vh] left-[50%] right-[50%] translate-x-[-50%] bg-white">
+                <p className='text-center text-[2rem] my-2'>Purchase History</p>
+                {purchasehistoryarray.toString().length !== 0 ? purchasehistoryarray.map(num => <div key={num} className="flex h-[20%] border-b-gray-500 border-b-[1.5px]">
+                    <img className='w-[25%] object-cover' src={carslist[num].image}/>
+                    <div className='font-bold ml-4 mt-2'>{carslist[num].name}</div>
+                    <div className='font-bold text-right w-full absolute translate-x-[-5%] mt-2'>{carslist[num].rent} per day</div>
+                </div>): ''}
+            </div>
             {
                 cartitems.length === 0 ? <div className="w-full flex flex-col items-center translate-y-[-10%]">
                     <img src="https://cdni.iconscout.com/illustration/premium/thumb/empty-inbox-4790940-3989293.png"/>

@@ -10,6 +10,7 @@ const Carinfo = ({rating, setcartitems, cartitems}) => {
     let navigate = useNavigate();
     const {carslist} = list;
     const {id} = useParams();
+    //othercars is an array of all the other cars of the same brand located at the bottom of the page
     let othercars = carslist.filter(car => car.name.split(' ')[0] === carslist[id].name.split(' ')[0] && car.id !== +id)
     let width = window.innerWidth;
     const rentclick = () => {
@@ -45,9 +46,9 @@ const Carinfo = ({rating, setcartitems, cartitems}) => {
                 {
                     othercars.length < 3 ? <div className='object-cover flex w-full '>
                         {
-                            width > 900 ? <div>
+                            width > 900 ? <div className='flex'>
                                 {
-                                othercars.map(car => <div className='mr-4' style={{width: width > 900 ? '35%' : '100%'}}>
+                                othercars.map(car => <div key={car.id} className='mr-4' style={{width: width > 900 ? '35%' : '100%'}}>
                                     <img onClick={() => navigate(`/car/${car.id}`)} className='hover hover:opacity-[0.8] h-full object-cover' src={car.image}/>
                                     <div className='text-white font-bold translate-y-[-170%] translate-x-4 z[1] text-xl'>{car.name}</div>
                                 </div>)

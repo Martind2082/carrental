@@ -23,7 +23,6 @@ const Carsinfo = ({sort, setSort, rating, setcartitems, cartitems}) => {
         }
     }
     const rentclick = (val) => {
-        console.log(val);
         if (cartitems.includes(val)) {
             navigate('/garage');
         } else {
