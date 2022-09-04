@@ -13,7 +13,7 @@ const Garage = ({cartitems, setcartitems}) => {
     let width = window.innerWidth;
     let navigate = useNavigate();
     const purchasehistoryref = useRef();
-    const {uid, purchasehistory} = useContext(firebasecontext);
+    const {uid, purchasehistory, setpurchasehistory} = useContext(firebasecontext);
     let purchasehistoryarray = purchasehistory.split(',');
     const [totaldays, settotaldays] = useState(1);
     const [dates, setdates] = useState({date1: '', date2: ''});
@@ -111,9 +111,7 @@ const Garage = ({cartitems, setcartitems}) => {
         updateDoc(doc(db, 'names', uid), {
             purchasehistory: ""
         })
-        for (let i = 0; i < document.getElementById('purchasehistorycontainer').children.length; i++) {
-            document.getElementById('purchasehistorycontainer').children[i].remove();
-        }
+        setpurchasehistory("");
     }
     return (
         <div className="translate-y-[6rem] w-[90%] m-auto">
@@ -199,26 +197,37 @@ const Garage = ({cartitems, setcartitems}) => {
                 <p>Cars</p>
                 <p onClick={removeallclick} className='text-red-400 hover hover:underline text-xl font-normal'>Remove all Cars</p>
                 </div>}
-                <div onClick={purchasehistoryclick} className='text-white hover z-[1] hover:bg-red-400 bg-gradient-to-r from-blue-400 to-blue-500 py-3 px-20 rounded-[20px] font-normal text-xl h-full'>Purchase History</div>
+                <div onClick={purchasehistoryclick} className='text-white hover z-[1] bg-gradient-to-r from-blue-400 to-blue-500 py-3 px-6 rounded-[20px] font-normal text-xl h-full' style={{}}>Purchase History</div>
             </div>
-            <div ref={purchasehistoryref} className="z-[1] pb-8 overflow-auto hidden rounded-[15px] border-2 border-blue-500 fixed w-[80%] h-[60vh] left-[50%] right-[50%] translate-x-[-50%] bg-white">
-                <div onClick={clearpurchasehistory} className='hover:underline hover text-red-300 absolute top-[0.7rem] left-[1.5rem] font-bold text-[1.2rem]'>Clear history</div>
-                <BsXLg className='hover absolute right-[1.5rem] top-[1rem] text-2xl' onClick={() => purchasehistoryref.current.style.display = 'none'}/>
-                <p className='text-center text-[2rem] my-2'>Purchase History</p>
-                <div id="purchasehistorycontainer">
-                    {purchasehistoryarray.toString().length !== 0 ? purchasehistoryarray.map(num => <div key={num} className="flex h-[20%] border-b-gray-500 border-b-[1.5px]">
-                        <img onClick={() => navigate(`/car/${num}`)} className='hover w-[25%] object-cover' src={carslist[num].image}/>
-                        <div className='font-bold ml-4 mt-2'>{carslist[num].name}</div>
-                        <div className='font-bold text-right w-full absolute translate-x-[-5%] mt-2'>{carslist[num].rent} per day</div>
-                    </div>): ''}
+            <div ref={purchasehistoryref} className="z-[1] pb-8 overflow-auto hidden rounded-[15px] border-2 border-blue-500 fixed w-[80%] h-[65vh] left-[50%] right-[50%] translate-x-[-50%] bg-white" style={{}}>
+                <BsXLg className='hover absolute right-[1.5rem] top-[1rem] text-2xl z-[1]' onClick={() => purchasehistoryref.current.style.display = 'none'}/>
+                <p className='text-center text-[2rem] my-2 relative left-2/4 -translate-x-2/4' style={{width: width > 540 ? '100%' : '200px' }}>Purchase History</p>
+                {purchasehistory.length !== 0 && <div onClick={clearpurchasehistory} className='hover:underline hover text-red-300 ml-2 font-bold text-4'>Clear history</div>}
+                <div id="purchasehistorycontainer" className='mt-4'>
+                    {purchasehistoryarray.toString().length !== 0 ? <div>
+                        <div className='flex relative w-full bg-blue-500'>
+                            <p className='ml-4'>Image</p>
+                            <p className='ml-20'>Name</p>
+                            <p className='absolute right-0 mr-12'>Cost</p>
+                        </div>
+                        {
+                        purchasehistoryarray.map(num => <div key={num} className="flex h-[125px] border-b-gray-500 border-b-[1.5px]">
+                            <img onClick={() => navigate(`/car/${num}`)} className='hover w-[150px] object-cover' src={carslist[num].image}/>
+                            <div className='font-bold ml-4 mt-2'>{carslist[num].name}</div>
+                            <div className='font-bold text-right w-full absolute translate-x-[-5%] mt-2'>{carslist[num].rent} per day</div>
+                        </div>)
+                        }
+                    </div> : <div className='flex flex-col items-center'>
+                        <img className='absolute translate-y-[-10%] w-[500px] h-[400px] z-[-1] object-cover' src="https://cdn.dribbble.com/users/1693462/screenshots/3504905/icon-404.gif"/>
+                        <p className='text-[1.3rem] absolute bottom-10 text-center'>Purchase history is currently empty. Cars you rent will appear here</p>
+                    </div>}
                 </div>
             </div>
             {
-                cartitems.length === 0 ? <div className="w-full flex flex-col items-center translate-y-[-10%]">
+                cartitems.length === 0 ? <div className="w-full flex flex-col items-center translate-y-[-5%]">
                     <img src="https://cdni.iconscout.com/illustration/premium/thumb/empty-inbox-4790940-3989293.png"/>
                     <p className="text-2xl font-bold text-center">You currently have no cars in your garage</p>
-                    <p className="text-2xl font-bold my-4 text-center">Cars you rent will appear here</p>
-                    <button onClick={() => navigate('/cars')} className="hover py-2 px-8 rounded-[20px] bg-gradient-to-r from-blue-300 to-blue-400 text-2xl text-white font-bold">View Cars</button>
+                    <button onClick={() => navigate('/cars')} className="my-6 hover py-2 px-8 rounded-[20px] bg-gradient-to-r from-blue-300 to-blue-400 text-2xl text-white font-bold">View Cars</button>
                 </div> : <div className='flex justify-between' style={{flexDirection: width > 900 ? 'row' : 'column'}}>
                     <div style={{width: width > 900 ? '55%' : '100%'}}>
                         {
