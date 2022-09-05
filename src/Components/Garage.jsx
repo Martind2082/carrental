@@ -205,16 +205,21 @@ const Garage = ({cartitems, setcartitems}) => {
                 {purchasehistory.length !== 0 && <div onClick={clearpurchasehistory} className='hover:underline hover text-red-300 ml-2 font-bold text-4'>Clear history</div>}
                 <div id="purchasehistorycontainer" className='mt-4'>
                     {purchasehistoryarray.toString().length !== 0 ? <div>
-                        <div className='flex relative w-full bg-blue-500'>
-                            <p className='ml-4'>Image</p>
-                            <p className='ml-20'>Name</p>
-                            <p className='absolute right-0 mr-12'>Cost</p>
-                        </div>
                         {
-                        purchasehistoryarray.map(num => <div key={num} className="flex h-[125px] border-b-gray-500 border-b-[1.5px]">
-                            <img onClick={() => navigate(`/car/${num}`)} className='hover w-[150px] object-cover' src={carslist[num].image}/>
-                            <div className='font-bold ml-4 mt-2'>{carslist[num].name}</div>
-                            <div className='font-bold text-right w-full absolute translate-x-[-5%] mt-2'>{carslist[num].rent} per day</div>
+                        purchasehistoryarray.map(num => <div>
+                            {
+                                width > 600 ? <div key={num} className="flex h-[125px] border-b-gray-500 border-b-[1.5px]">
+                                <img onClick={() => navigate(`/car/${num}`)} className='hover w-[150px] object-cover' src={carslist[num].image}/>
+                                <div className='font-bold ml-4 mt-2'>{carslist[num].name}</div>
+                                <div className='font-bold text-right w-full absolute translate-x-[-5%] mt-2'>{carslist[num].rent} per day</div>
+                            </div> : <div key={num} className="flex w-full h-[125px] border-b-gray-500 border-b-[1.5px]">
+                                <img onClick={() => navigate(`/car/${num}`)} className='hover w-[50%] object-cover' src={carslist[num].image}/>
+                                <div>
+                                    <div className='font-bold text-center ml-4'>{carslist[num].name}</div>
+                                    <div className='font-bold text-center ml-4'>{carslist[num].rent} per day</div>
+                                </div>
+                            </div>
+                            }
                         </div>)
                         }
                     </div> : <div className='flex flex-col items-center'>

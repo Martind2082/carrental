@@ -28,7 +28,7 @@ const Createaccount = () => {
                     </div>
                     <div className='flex rounded-lg p-3 border-[1.5px] border-gray-400 items-center mb-4'>
                         <FaEnvelope className='mr-4' />
-                        <input required name="email" className='outline-none font-thin text-[1rem]' placeholder='Name' type="text"/>
+                        <input required name="email" className='outline-none font-thin text-[1rem]' placeholder='Email' type="text"/>
                     </div>
                     <div className='relative flex rounded-lg p-3 border-[1.5px] border-gray-400 items-center mb-8'>
                         <FaLock className='mr-4' />

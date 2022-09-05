@@ -24,7 +24,6 @@ const Home = ({setSort}) => {
         setSort(sort);
         navigate(`/cars/${name}`)
     }
-
     return (
         <div>
             <main className="w-screen h-[100vh]">
@@ -46,7 +45,7 @@ const Home = ({setSort}) => {
                 </Swiper>
             </main>
             <div className='absolute left-2/4 top-[35vh] translate-y-[-50%] translate-x-[-50%] flex flex-col items-center text-2xl md:text-4xl text-center z-[2] text-white font-bold w-3/4'>
-                <p>Welcome to Rent Smart{user ? ', ' + signedinuser : ''}!</p>
+                <p>Welcome to Rent Smart{user && signedinuser !== null ? ', ' + signedinuser : ''}!</p>
                 <p className='my-4'>World's best Car Rental service</p>
                 <button onClick={() => navigate('/cars')} className='hover py-3 px-12 rounded-[20px] bg-gradient-to-r from-blue-300 to-blue-400 text-xl'>View Cars</button>
             </div>

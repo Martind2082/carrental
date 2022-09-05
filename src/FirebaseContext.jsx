@@ -66,40 +66,41 @@ const FirebaseContext = ({children, setcartitems, cartitems}) => {
     }
     useEffect(() => {
         const unsub = onSnapshot(collection(db, "names"), snapshot => {
-            console.log('new snapshot');
-            for (let i = 0; i < snapshot.docs.length; i++) {
-                if (snapshot.docs[i].data().email === user.email) {
-                    setUid(snapshot.docs[i].id);
-                    setsignedinuser(snapshot.docs[i].data().name);
-                    if (snapshot.docs[i].data().purchasehistory.length !== 0) {
-                        setpurchasehistory(snapshot.docs[i].data().purchasehistory);
+            if (user) {
+                for (let i = 0; i < snapshot.docs.length; i++) {
+                    if (snapshot.docs[i].data().email === user.email) {
+                        setUid(snapshot.docs[i].id);
+                        setsignedinuser(snapshot.docs[i].data().name);
+                        if (snapshot.docs[i].data().purchasehistory.length !== 0) {
+                            setpurchasehistory(snapshot.docs[i].data().purchasehistory);
+                        }
+                        if (snapshot.docs[i].data().garageitems.length !== 0) {
+                            let cartitems = snapshot.docs[i].data().garageitems.split(',').map(num => carslist[num]); 
+                            setcartitems(cartitems);
+                        }
+                        return;
                     }
-                    if (snapshot.docs[i].data().garageitems.length !== 0) {
-                        let cartitems = snapshot.docs[i].data().garageitems.split(',').map(num => carslist[num]); 
-                        setcartitems(cartitems);
-                    }
-                    return;
                 }
-            }
-            addDoc(collection(db, 'names'), {
-                email: user.email,
-                name: user.displayName,
-                purchasehistory: "",
-                garageitems: ""
-            })
-            for (let i = 0; i < snapshot.docs.length; i++) {
-                if (snapshot.docs[i].data().email === user.email) {
-                    setUid(snapshot.docs[i].id);
-                    setsignedinuser(snapshot.docs[i].data().name);
-                    if (snapshot.docs[i].data().purchasehistory) {
-                        setpurchasehistory(snapshot.docs[i].data().purchasehistory);
+                addDoc(collection(db, 'names'), {
+                    email: user.email,
+                    name: user.displayName,
+                    purchasehistory: "",
+                    garageitems: ""
+                })
+                for (let i = 0; i < snapshot.docs.length; i++) {
+                    if (snapshot.docs[i].data().email === user.email) {
+                        setUid(snapshot.docs[i].id);
+                        setsignedinuser(snapshot.docs[i].data().name);
+                        if (snapshot.docs[i].data().purchasehistory) {
+                            setpurchasehistory(snapshot.docs[i].data().purchasehistory);
+                        }
+                        if (snapshot.docs[i].data().garageitems.length !== 0) {
+                            let cartitems = snapshot.docs[i].data().garageitems.map(num => carslist[num]); 
+                            setcartitems(cartitems);
+                        }
+                        return;
                     }
-                    if (snapshot.docs[i].data().garageitems.length !== 0) {
-                        let cartitems = snapshot.docs[i].data().garageitems.map(num => carslist[num]); 
-                        setcartitems(cartitems);
-                    }
-                    return;
-                }
+                }   
             }
         })
         return unsub;
