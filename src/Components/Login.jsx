@@ -8,28 +8,39 @@ import { useState } from 'react';
 import {GoogleButton} from 'react-google-button'
 
 const Login = () => {
-    const {login, user, signinwithgoogle} = useContext(firebasecontext);
+    const {login, user, signinwithgoogle, loginerror} = useContext(firebasecontext);
     let navigate = useNavigate();
     const form = useRef();
     useEffect(() => {
         user && navigate('/')
     }, [user])
     const [seepassword, setseepassword] = useState(false);
+    useEffect(() => {
+        if (loginerror !== '') {
+            if (loginerror === 'Incorrect Password') {
+                document.getElementById('loginpassword').style.border = '2px solid red';
+                document.getElementById('loginemailerror').textContent = 'Incorrect Password';
+                document.getElementById('loginemailerror').style.color = 'red';
+                document.getElementById('loginemailerror').style.fontSize = '0.8rem';
+            }
+        }
+    }, [loginerror])
     return (
         <div>
             <img className="w-screen h-screen opacity-60" src="https://www.dollar.com/~/media/Dollar/Images/Business/Government/0618-business-government-car-tire-road.ashx"/>
             <div className='absolute top-[15vh] left-[7%] p-10 border-black border-2 bg-white'>
                 <form ref={form} onSubmit={(e) => login(form.current.email.value, form.current.password.value, e)} className='font-bold text-[1.2rem] relative'>
                     <h1 className='text-3xl mb-3 text-center'>Log in to rent a car</h1>
-                    <div className='flex rounded-lg p-3 border-[1.5px] border-gray-400 items-center mb-4 mt-8'>
+                    <div id="loginemail" className='flex rounded-lg p-3 border-[1.5px] border-gray-400 items-center mt-8 mb-4'>
                         <FaEnvelope className='mr-4 text-gray-500' />
                         <input required name="email" className='outline-none font-thin text-[1rem] bg-none' placeholder='Name' type="text"/>
                     </div>
-                    <div className='relative flex rounded-lg p-3 border-[1.5px] border-gray-400 items-center mb-8'>
+                    <div id="loginpassword" className='relative flex rounded-lg p-3 border-[1.5px] border-gray-400 items-center'>
                         <FaLock className='mr-4 text-gray-500' />
                         <input required name="password" className='outline-none font-thin text-[1rem]' placeholder='Password' type={seepassword ? 'text' : 'password'}/>
                         {seepassword ? <FaEye className='hover absolute right-4 text-2xl text-gray-500' onClick={() => setseepassword(!seepassword)}/> : <FaEyeSlash className='hover absolute right-4 text-2xl text-gray-500' onClick={() => setseepassword(!seepassword)}/>}
                     </div>
+                    <div className="mb-8" id="loginemailerror"></div>
                     <input value="Login" className='hover my-3 text-white block bg-gradient-to-r from-blue-400 to-blue-500 w-full rounded-[10px] py-2' type="submit" />
                     <p className='text-center hover hover:underline text-blue-600'>Forgot your password?</p>
                     <div className="flex items-center my-4">

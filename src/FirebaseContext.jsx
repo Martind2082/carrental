@@ -14,6 +14,7 @@ const FirebaseContext = ({children, setcartitems, cartitems}) => {
     const [purchasehistory, setpurchasehistory] = useState('');
     const [signedinuser, setsignedinuser] = useState();
     const [uid, setUid] = useState();
+    const [loginerror, setloginerror] = useState('');
 
     const colRef = collection(db, "names");
     useEffect(() => {
@@ -47,7 +48,22 @@ const FirebaseContext = ({children, setcartitems, cartitems}) => {
     function login(email, password, e) {
         e.preventDefault();
         signInWithEmailAndPassword(auth, email, password)
+            .then(() => {
+                setloginerror('');
+            })
             .catch(err => {
+                if ((err.toString().split(' ').slice(-1).join('') === '(auth/invalid-email).')) {
+                    setloginerror('Invalid Email');
+                    return;
+                }
+                if (err.toString().split(' ').slice(-1).join('') === '(auth/user-not-found).') {
+                    setloginerror('User not Found');
+                    return;
+                }
+                if (err.toString().split(' ').slice(-1).join('') === '(auth/wrong-password).') {
+                    setloginerror('Incorrect Password');
+                    return;
+                }
                 let popup = document.createElement('div');
                 popup.classList.add('popup');
                 popup.textContent = err.toString();
@@ -62,7 +78,9 @@ const FirebaseContext = ({children, setcartitems, cartitems}) => {
     }
     function signinwithgoogle() {
         let provider = new GoogleAuthProvider();
-        signInWithPopup(auth, provider)
+        signInWithPopup(auth, provider).then(() => {
+            setloginerror('');
+        })
     }
     useEffect(() => {
         const unsub = onSnapshot(collection(db, "names"), snapshot => {
@@ -118,7 +136,7 @@ const FirebaseContext = ({children, setcartitems, cartitems}) => {
         }
     }, [cartitems])
     return (
-        <firebasecontext.Provider value={{user, createaccount, login, signout, signinwithgoogle, signedinuser, setsignedinuser, uid, setUid, purchasehistory, setpurchasehistory}}>
+        <firebasecontext.Provider value={{user, createaccount, login, signout, signinwithgoogle, signedinuser, setsignedinuser, uid, setUid, purchasehistory, setpurchasehistory, loginerror}}>
             {!loading && children}
         </firebasecontext.Provider>
     );
