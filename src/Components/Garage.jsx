@@ -209,14 +209,14 @@ const Garage = ({cartitems, setcartitems}) => {
                         purchasehistoryarray.map(num => <div>
                             {
                                 width > 600 ? <div key={num} className="flex h-[125px] border-b-gray-500 border-b-[1.5px]">
-                                <img onClick={() => navigate(`/car/${num}`)} className='hover w-[150px] object-cover' src={carslist[num].image}/>
-                                <div className='font-bold ml-4 mt-2'>{carslist[num].name}</div>
-                                <div className='font-bold text-right w-full absolute translate-x-[-5%] mt-2'>{carslist[num].rent} per day</div>
+                                <img onClick={() => navigate(`/car/${num}`)} className='hover w-[200px] object-cover' src={carslist[num].image}/>
+                                <div className='font-bold ml-4 mt-2 text-2xl'>{carslist[num].name}</div>
+                                <div className='font-bold text-right w-full absolute translate-x-[-5%] mt-2 text-2xl'>{carslist[num].rent} per day</div>
                             </div> : <div key={num} className="flex w-full h-[125px] border-b-gray-500 border-b-[1.5px]">
                                 <img onClick={() => navigate(`/car/${num}`)} className='hover w-[50%] object-cover' src={carslist[num].image}/>
-                                <div>
-                                    <div className='font-bold text-center ml-4'>{carslist[num].name}</div>
-                                    <div className='font-bold text-center ml-4'>{carslist[num].rent} per day</div>
+                                <div className='w-2/4'>
+                                    <div className='font-bold text-center'>{carslist[num].name}</div>
+                                    <div className='font-bold text-center'>{carslist[num].rent} per day</div>
                                 </div>
                             </div>
                             }

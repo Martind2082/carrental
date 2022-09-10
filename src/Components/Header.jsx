@@ -5,7 +5,7 @@ import {Link, useNavigate} from 'react-router-dom';
 import {BsXLg} from 'react-icons/bs'
 import { useState } from "react";
 import { db } from "../firebase";
-import { doc, updateDoc, deleteDoc } from "firebase/firestore";
+import { doc, updateDoc } from "firebase/firestore";
 import { useRef } from "react";
 import {GiHomeGarage} from 'react-icons/gi'
 import {BiMenu} from 'react-icons/bi'
@@ -68,9 +68,6 @@ const Header = () => {
             menuref.current.style.visibility = 'hidden';
         }
     }
-    const deleteAccount = () => {
-        deleteDoc(doc(db, 'names', uid))
-    }
     return (
         <header>
             <div className='absolute top-0 right-0 flex flex-col items-end pr-10 bg-white h-screen z-[20]' style={{width: width > 900 ? '25%' : '100%', transition: "all 400ms ease", visibility: accountdisplay(), transform: accounttranslate()}}>
@@ -83,7 +80,6 @@ const Header = () => {
                     <button onClick={handleEditing} className='hover:underline border-2 mt-1 border-red-300 rounded-lg px-5 text-red-500 font-bold'>{!editing ? 'Edit' : editvalue.length === 0 ? 'Cancel' : 'Done'}</button>
                 </div>
                 <button onClick={() => {signout(); setAccount(false)}} className='my-10 hover:underline border-2 border-orange-400 rounded-lg px-5 py-1 text-orange-400 font-bold'>Sign out</button>
-                <button onClick={() => {signout(); deleteAccount(); setAccount(false);}} className='hover:underline border-2 border-orange-400 rounded-lg px-5 py-1 text-orange-400 font-bold'>Delete Account</button>
             </div>
             {
                 width > 900 ? <div className="flex justify-between items-center w-screen h-[15vh] fixed font-bold z-[10]">
