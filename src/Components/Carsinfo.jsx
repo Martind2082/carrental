@@ -33,14 +33,14 @@ const Carsinfo = ({sort, setSort, rating, setcartitems, cartitems}) => {
         <div className='pb-[15rem]'>
             <div className='text-3xl font-bold translate-y-[15vh] ml-20 flex justify-between w-[85%]'>
                 <div>{array.length} results for {name}</div>
-                <select onChange={(e) => setSort(e.target.value)} value={sort} className="text-xl">
+                <select onChange={(e) => setSort(e.target.value)} value={sort} className="text-xl border border-black">
                     <option value="lowtohigh">Price low to high</option>
                     <option value="hightolow">Price high to low</option>
                     <option value="rating">Rating</option>
                 </select>
             </div>
             <div className='grid gap-4 justify-center translate-y-[20vh]' style={{gridTemplateColumns: colsort()}}>
-                {array.map(val => <div className='hover carinfo font-bold shadow-lg pb-10 hover:shadow-2xl' key={val.id}>
+                {array.map(val => <div className='hover carinfo font-bold shadow-lg pb-20 hover:shadow-2xl' key={val.id}>
                     <div className='text-2xl font-bold my-3'>{val.name}</div>
                     <img onClick={() => navigate(`/car/${val.id}`)} src={val.image} className="h-[60%] w-full object-cover"/>
                     <div className='mt-4 ml-6 flex items-center'><span className='mr-2'>Rating:</span> {rating(val.rating)}</div>

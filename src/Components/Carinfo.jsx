@@ -5,6 +5,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import {FaChevronLeft} from 'react-icons/fa'
 
 const Carinfo = ({rating, setcartitems, cartitems}) => {
     let navigate = useNavigate();
@@ -22,8 +23,12 @@ const Carinfo = ({rating, setcartitems, cartitems}) => {
     }
     return (
         <div className='translate-y-[14%]'>
-            <div className='flex m-auto shadow-2xl' style={{flexDirection: width > 900 ? 'row' : 'column', width: width > 900 ? '80%' : '100%'}}>
-                <img className='h-[100%] object-cover' style={{width: width > 900 ? '50%' : '100%'}} src={carslist[id].image}/>
+            <div className='flex text-xl translate-x-[12%] mb-4'>
+                <div onClick={() => navigate('/cars')} className="flex items-center font-bold mr-6 hover hover:underline"><FaChevronLeft className='mr-2'/> All Cars</div>
+                <div onClick={() => navigate(`/cars/${carslist[id].name.split(' ')[0].toLowerCase()}`)} className='flex items-center font-bold hover hover:underline'><FaChevronLeft className='mr-2'/>{carslist[id].name.split(' ')[0]} Cars</div>
+            </div>
+            <div className='flex m-auto shadow-2xl' style={{flexDirection: width > 650 ? 'row' : 'column', width: width > 650 ? '80%' : '100%'}}>
+                <img className='h-[100%] object-cover' style={{width: width > 650 ? '50%' : '100%'}} src={carslist[id].image}/>
                 <div className='pl-4 font-bold flex flex-col justify-around'>
                     <div className='font-bold text-3xl my-3'>{carslist[id].name}</div>
                     <div className='flex items-center text-2xl'><span className='mr-2 text-gray-600'>Rating: </span> {rating(carslist[id].rating)}</div>
@@ -46,9 +51,9 @@ const Carinfo = ({rating, setcartitems, cartitems}) => {
                 {
                     othercars.length < 3 ? <div className='object-cover flex w-full '>
                         {
-                            width > 900 ? <div className='flex'>
+                            width > 650 ? <div className='flex'>
                                 {
-                                othercars.map(car => <div key={car.id} className='mr-4' style={{width: width > 900 ? '35%' : '100%'}}>
+                                othercars.map(car => <div key={car.id} className='mr-4' style={{width: width > 650 ? '35%' : '100%'}}>
                                     <img onClick={() => navigate(`/car/${car.id}`)} className='hover hover:opacity-[0.8] h-full object-cover' src={car.image}/>
                                     <div className='text-white font-bold translate-y-[-170%] translate-x-4 z[1] text-xl'>{car.name}</div>
                                 </div>)
@@ -66,7 +71,7 @@ const Carinfo = ({rating, setcartitems, cartitems}) => {
                                 >
                                 {
                                     othercars.map(car => <SwiperSlide  key={car.id}>
-                                        <img onClick={() => navigate(`/car/${car.id}`)} className='w-[95%] h-full hover:opacity-[0.8] hover' src={car.image}/>
+                                        <img onClick={() => navigate(`/car/${car.id}`)} className='w-[95%] h-full hover:opacity-[0.8] hover object-cover' src={car.image}/>
                                         <div className='translate-y-[-170%] translate-x-4 text-xl font-bold text-white'>{car.name}</div>
                                     </SwiperSlide>)
                                 }
@@ -75,14 +80,14 @@ const Carinfo = ({rating, setcartitems, cartitems}) => {
                     </div> : <Swiper className='h-[30vh]'
                     modules={[Navigation, Pagination]}
                     spaceBetween={0}
-                    slidesPerView={width > 900 ? '3' : '1'}
+                    slidesPerView={width > 650 ? '3' : '1'}
                     navigation
                     pagination={{ clickable: true }}
                     loop={true}
                     >
                     {
                         othercars.map(car => <SwiperSlide  key={car.id}>
-                            <img onClick={() => navigate(`/car/${car.id}`)} className='w-[95%] h-full hover:opacity-[0.8] hover' src={car.image}/>
+                            <img onClick={() => navigate(`/car/${car.id}`)} className='w-[95%] h-full hover:opacity-[0.8] hover object-cover' src={car.image}/>
                             <div className='translate-y-[-170%] translate-x-4 text-xl font-bold text-white'>{car.name}</div>
                         </SwiperSlide>)
                     }

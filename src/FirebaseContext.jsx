@@ -106,6 +106,9 @@ const FirebaseContext = ({children, setcartitems, cartitems}) => {
         return unsub;
     }, [user])
     useEffect(() => {
+        if (!user) {
+            return;
+        }
         if (cartitems.length !== 0) {
             let cartids = cartitems.map(obj => obj.id);
             cartids = cartids.join(',');

@@ -13,7 +13,7 @@ const Garage = ({cartitems, setcartitems}) => {
     let width = window.innerWidth;
     let navigate = useNavigate();
     const purchasehistoryref = useRef();
-    const {uid, purchasehistory, setpurchasehistory} = useContext(firebasecontext);
+    const {uid, purchasehistory, setpurchasehistory, user} = useContext(firebasecontext);
     let purchasehistoryarray = purchasehistory.split(',');
     const [totaldays, settotaldays] = useState(1);
     const [dates, setdates] = useState({date1: '', date2: ''});
@@ -59,6 +59,10 @@ const Garage = ({cartitems, setcartitems}) => {
         return '$' + totalprice;
     }, [cartitems, totaldays])
     const proceedcheckout = () => {
+        if (!user) {
+            navigate('/login');
+            return;
+        }
         if (!dates.date1 || pickuptime === '' || !dates.date2 || dropofftime === '') {
             let div = document.createElement('div');
             div.classList.add('popup');
@@ -206,7 +210,7 @@ const Garage = ({cartitems, setcartitems}) => {
                 <div id="purchasehistorycontainer" className='mt-4'>
                     {purchasehistoryarray.toString().length !== 0 ? <div>
                         {
-                        purchasehistoryarray.map(num => <div>
+                        purchasehistoryarray.map(num => <div key={num}>
                             {
                                 width > 600 ? <div key={num} className="flex h-[125px] border-b-gray-500 border-b-[1.5px]">
                                 <img onClick={() => navigate(`/car/${num}`)} className='hover w-[200px] object-cover' src={carslist[num].image}/>
@@ -305,7 +309,7 @@ const Garage = ({cartitems, setcartitems}) => {
                             </div>
                         </div>
                         <div>{totaldays} {totaldays === 1 ? 'day' : 'days'}: <span className='font-bold'>{total}</span> total</div>
-                        <button onClick={proceedcheckout} className='w-full my-4 text-xl py-3 bg-gradient-to-r from-blue-400 to-blue-500 font-bold text-white rounded-[20px]'>Proceed to Checkout</button>
+                        <button onClick={proceedcheckout} className='w-full my-4 text-xl py-3 bg-gradient-to-r from-blue-400 to-blue-500 font-bold text-white rounded-[20px]'>{user ? 'Proceed to Checkout' : 'Sign in to complete Checkout'}</button>
                     </div>
                 </div>
             }
