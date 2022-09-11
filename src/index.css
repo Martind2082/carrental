@@ -24,7 +24,7 @@ html {
     font-size: 2rem;
     font-weight: bold;
     text-align: center;
-    animation: popup 3s linear;
+    animation: popup 10s linear;
     position: absolute;
     top: 0;
     left: 50%;
@@ -98,4 +98,11 @@ html {
         transform: translateY(0%);
         opacity: 1;
     }
+}
+.accounterror {
+    color: red;
+    font-size: 0.8rem;
+    height: 1rem;
+    margin-bottom: 1rem;
+    padding-left: 0.5rem;
 }

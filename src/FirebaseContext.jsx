@@ -15,6 +15,7 @@ const FirebaseContext = ({children, setcartitems, cartitems}) => {
     const [signedinuser, setsignedinuser] = useState();
     const [uid, setUid] = useState();
     const [loginerror, setloginerror] = useState('');
+    const [signuperror, setsignuperror] = useState('');
 
     const colRef = collection(db, "names");
     useEffect(() => {
@@ -36,13 +37,21 @@ const FirebaseContext = ({children, setcartitems, cartitems}) => {
                 })
             })
             .catch(err => {
+                if (err.toString().split(' ').slice(-1).join('') === '(auth/invalid-email).') {
+                    setsignuperror('Invalid Email');
+                    return;
+                }
+                if (err.toString().split(' ').slice(-1).join('') === '(auth/weak-password).') {
+                    setsignuperror('Password must be at least 6 characters');
+                    return;
+                }
                 let popup = document.createElement('div');
                 popup.classList.add('popup');
                 popup.textContent = err.toString();
                 document.body.append(popup);
                 setTimeout(() => {
                     popup.remove();
-                }, 3500);
+                }, 10000);
             });
     }
     function login(email, password, e) {
@@ -70,7 +79,7 @@ const FirebaseContext = ({children, setcartitems, cartitems}) => {
                 document.body.append(popup);
                 setTimeout(() => {
                     popup.remove();
-                }, 3500);
+                }, 10000);
             })
     }
     function signout() {
@@ -136,7 +145,7 @@ const FirebaseContext = ({children, setcartitems, cartitems}) => {
         }
     }, [cartitems])
     return (
-        <firebasecontext.Provider value={{user, createaccount, login, signout, signinwithgoogle, signedinuser, setsignedinuser, uid, setUid, purchasehistory, setpurchasehistory, loginerror}}>
+        <firebasecontext.Provider value={{user, createaccount, login, signout, signinwithgoogle, signedinuser, setsignedinuser, uid, setUid, purchasehistory, setpurchasehistory, loginerror, signuperror}}>
             {!loading && children}
         </firebasecontext.Provider>
     );
