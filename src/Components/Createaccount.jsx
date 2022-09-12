@@ -9,19 +9,23 @@ import { useState } from 'react';
 import {GoogleButton} from 'react-google-button'
 
 const Createaccount = () => {
-    const {createaccount, user, signinwithgoogle, signuperror} = useContext(firebasecontext);
+    const {createaccount, user, signinwithgoogle, signuperror, setsignuperror} = useContext(firebasecontext);
     const form = useRef();
     let navigate = useNavigate();
     useEffect(() => {
         user && navigate('/')
     }, [user])
     const [seepassword, setseepassword] = useState(false);
+    const resetsignuperrors = () => {
+        setsignuperror('');
+        document.getElementById('signuppassword').style.border = '1.5px solid gray';
+        document.getElementById('signuppassworderror').textContent = '';
+        document.getElementById('signupemailerror').textContent = '';
+        document.getElementById('signupemail').style.border = '1.5px solid gray';
+    }
     useEffect(() => {
             if (signuperror === '') {
-                document.getElementById('signuppassword').style.border = '1.5px solid gray';
-                document.getElementById('signuppassworderror').textContent = '';
-                document.getElementById('signupemailerror').textContent = '';
-                document.getElementById('signupemail').style.border = '1.5px solid gray';
+                resetsignuperrors();
                 return;
             }
             if (signuperror === 'Invalid Email') {
@@ -41,7 +45,7 @@ const Createaccount = () => {
             <img className="w-screen h-screen opacity-60" src="https://www.dollar.com/~/media/Dollar/Images/Business/Government/0618-business-government-car-tire-road.ashx"/>
             <div className='absolute top-[15vh] left-[7%] p-10 border-black border-2 bg-white'>
                 <form ref={form} onSubmit={(e) => createaccount(form.current.name.value, form.current.email.value, form.current.password.value, e)} className='font-bold text-[1.2rem]'>
-                    <h1 className='text-3xl mb-3'>Create account to rent a car</h1>
+                    <h1 className='text-3xl mb-3 text-center'>Create account to rent a car</h1>
                     <div className='flex rounded-lg p-3 border-[1.5px] border-gray-400 items-center mb-8 mt-8'>
                         <FaUser className='mr-4' />
                         <input required name="name" className='outline-none font-thin text-[1rem]' placeholder='Name' type="text"/>
@@ -64,7 +68,7 @@ const Createaccount = () => {
                         <div className='w-2/4 h-[1px] bg-gray-400'></div>
                     </div>
                     <GoogleButton onClick={signinwithgoogle} className="relative mb-4 mt-5 left-2/4 -translate-x-2/4"/>
-                    <div className='text-center'>Have an account? <Link to="/login"><span className='text-blue-600 hover:underline'>Log in</span></Link></div>
+                    <div className='text-center'>Have an account? <Link to="/login" onClick={resetsignuperrors}><span className='text-blue-600 hover:underline'>Log in</span></Link></div>
                 </form>
             </div>
         </div>

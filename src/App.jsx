@@ -12,6 +12,7 @@ import Cars from './Components/Cars';
 import {AiFillStar, AiOutlineStar} from 'react-icons/ai'
 import Carinfo from './Components/Carinfo';
 import Garage from './Components/Garage';
+import Forgotpassword from './Components/Forgotpassword';
 
 function App() {
   const [sort, setSort] = useState();
@@ -33,6 +34,7 @@ function App() {
           <Route exact path="/about" element={<About />}/>
           <Route exact path="/login" element={<Login />}/>
           <Route exact path="/createaccount" element={<Createaccount />}/>
+          <Route exact path="/forgotpassword" element={<Forgotpassword />} />
           <Route exact path="/cars" element={<Cars rating={rating} />}/>
           <Route exact path="/cars/:name" element={<Carsinfo sort={sort} setSort={setSort} rating={rating} cartitems={cartitems} setcartitems={setcartitems}/>}/>
           <Route exact path="/car/:id" element={<Carinfo rating={rating} cartitems={cartitems} setcartitems={setcartitems}/>}/>

@@ -8,29 +8,34 @@ import { useState } from 'react';
 import {GoogleButton} from 'react-google-button'
 
 const Login = () => {
-    const {login, user, signinwithgoogle, loginerror} = useContext(firebasecontext);
+    const {login, user, signinwithgoogle, loginerror, setloginerror} = useContext(firebasecontext);
     let navigate = useNavigate();
     const form = useRef();
     useEffect(() => {
         user && navigate('/')
     }, [user])
     const [seepassword, setseepassword] = useState(false);
+    //if there are red message errors in login boxes, it will reset them
+    function resetloginerrors() {
+        setloginerror('');
+        document.getElementById('loginemail').style.border = '1.5px solid gray';
+        document.getElementById('loginpassword').style.border = '1.5px solid gray';
+        document.getElementById('loginemailerror').textContent = '';
+        document.getElementById('loginpassworderror').textContent = '';
+    }
     useEffect(() => {
         if (loginerror === '') {
-            document.getElementById('loginemail').style.border = 'none';
-            document.getElementById('loginpassword').style.border = 'none';
-            document.getElementById('loginemail').style.border = '';
-            document.getElementById('loginpassword').style.border = '';
+            resetloginerrors();
             return;
         }
         if (loginerror !== '') {
             if (loginerror === 'Incorrect Password') {
-                document.getElementById('loginpassword').style.border = '2px solid red';
+                document.getElementById('loginpassword').style.border = '1.5px solid red';
                 document.getElementById('loginpassworderror').textContent = 'Incorrect Password';
                 document.getElementById('loginemailerror').textContent = '';
                 document.getElementById('loginemail').style.border = '1.5px solid gray';
             } else {
-                document.getElementById('loginemail').style.border = '2px solid red';
+                document.getElementById('loginemail').style.border = '1.5px solid red';
                 document.getElementById('loginemailerror').textContent = loginerror;
                 document.getElementById('loginpassword').style.border = '1.5px solid gray';
                 document.getElementById('loginpassworderror').textContent = '';
@@ -55,14 +60,14 @@ const Login = () => {
                     </div>
                     <div className="accounterror" id="loginpassworderror"></div>
                     <input value="Login" className='hover my-3 text-white block bg-gradient-to-r from-blue-400 to-blue-500 w-full rounded-[10px] py-2' type="submit" />
-                    <p className='text-center hover hover:underline text-blue-600'>Forgot your password?</p>
+                    <Link to="/forgotpassword"><p className='text-center hover hover:underline text-blue-600'>Forgot your password?</p></Link>
                     <div className="flex items-center my-4">
                         <div className='w-2/4 h-[1px] bg-gray-400'></div>
                         <p className='mx-2 text-gray-500 font-[900]'>OR</p>
                         <div className='w-2/4 h-[1px] bg-gray-400'></div>
                     </div>
                     <GoogleButton onClick={signinwithgoogle} className="relative mb-4 left-2/4 -translate-x-2/4"/>
-                    <p>Don't have an account? <Link to="/createaccount"><span className='text-blue-600 hover:underline'>Create Account</span></Link></p>
+                    <p className='text-center'>Don't have an account? <Link to="/createaccount" onClick={resetloginerrors}><span className='text-blue-600 hover:underline'>Create Account</span></Link></p>
                 </form>
             </div>
         </div>

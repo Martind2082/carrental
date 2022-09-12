@@ -227,8 +227,8 @@ const Garage = ({cartitems, setcartitems}) => {
                         </div>)
                         }
                     </div> : <div className='flex flex-col items-center'>
-                        <img className='absolute translate-y-[-10%] w-[500px] h-[400px] z-[-1] object-cover' src="https://cdn.dribbble.com/users/1693462/screenshots/3504905/icon-404.gif"/>
-                        <p className='text-[1.3rem] absolute bottom-10 text-center'>Purchase history is currently empty. Cars you rent will appear here</p>
+                        <img className='absolute translate-y-[-15%] w-[500px] h-[400px] z-[-1] object-cover' src="https://cdn.dribbble.com/users/1693462/screenshots/3504905/icon-404.gif"/>
+                        <p className='text-[1.3rem] absolute bottom-10 text-center px-4'>Purchase history is currently empty. Cars you rent will appear here</p>
                     </div>}
                 </div>
             </div>

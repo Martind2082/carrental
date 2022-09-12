@@ -4,11 +4,12 @@ import logo from '../Images/logo.png';
 import {Link, useNavigate} from 'react-router-dom';
 import {BsXLg} from 'react-icons/bs'
 import { useState } from "react";
-import { db } from "../firebase";
-import { doc, updateDoc } from "firebase/firestore";
+import { auth, db } from "../firebase";
+import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { useRef } from "react";
 import {GiHomeGarage} from 'react-icons/gi'
 import {BiMenu} from 'react-icons/bi'
+import { deleteUser, sendPasswordResetEmail } from "firebase/auth";
 
 const Header = () => {
     let navigate = useNavigate();
@@ -68,9 +69,16 @@ const Header = () => {
             menuref.current.style.visibility = 'hidden';
         }
     }
+    let usercopy = user;
+    let uidcopy = uid;
+    const deleteAccount = () => {
+        deleteUser(usercopy)
+            .then(() => deleteDoc(doc(db, 'names', uidcopy)))
+            .catch(err => alert(err));
+    }
     return (
         <header>
-            <div className='absolute top-0 right-0 flex flex-col items-end pr-10 bg-white h-screen z-[20]' style={{width: width > 900 ? '25%' : '100%', transition: "all 400ms ease", visibility: accountdisplay(), transform: accounttranslate()}}>
+            <div className='absolute top-0 right-0 flex flex-col items-end pr-10 bg-white h-screen z-[20]' style={{width: width > 900 ? '30%' : '100%', transition: "all 400ms ease", visibility: accountdisplay(), transform: accounttranslate()}}>
                 <BsXLg onClick={() => setAccount(false)} className='hover absolute right-10 top-4 text-3xl'/>
                 <p className='text-center text-3xl font-bold mt-[4rem] mb-[2rem]'>Account</p>
                 <div className='flex flex-col items-end justify-center'>
@@ -80,6 +88,7 @@ const Header = () => {
                     <button onClick={handleEditing} className='hover:underline border-2 mt-1 border-red-300 rounded-lg px-5 text-red-500 font-bold'>{!editing ? 'Edit' : editvalue.length === 0 ? 'Cancel' : 'Done'}</button>
                 </div>
                 <button onClick={() => {signout(); setAccount(false)}} className='my-10 hover:underline border-2 border-orange-400 rounded-lg px-5 py-1 text-orange-400 font-bold'>Sign out</button>
+                <button onClick={() => {signout(); deleteAccount(); setAccount(false);}} className='hover:underline border-2 border-orange-400 rounded-lg px-5 py-1 text-orange-400 font-bold'>Delete Account</button>
             </div>
             {
                 width > 900 ? <div className="flex justify-between items-center w-screen h-[15vh] fixed font-bold z-[10]">
