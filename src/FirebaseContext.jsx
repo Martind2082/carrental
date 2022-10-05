@@ -169,7 +169,7 @@ const FirebaseContext = ({children, setcartitems, cartitems}) => {
                     return;
                 }
             });
-    }
+    } 
     return (
         <firebasecontext.Provider value={{user, resetpass, setresetpass, createaccount, login, signout, signinwithgoogle, signedinuser, setsignedinuser, uid, setUid, purchasehistory, setpurchasehistory, loginerror, setloginerror, signuperror, setsignuperror, resetpassword}}>
             {!loading && children}

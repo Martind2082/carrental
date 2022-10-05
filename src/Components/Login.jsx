@@ -50,7 +50,7 @@ const Login = () => {
                     <h1 className='text-3xl mb-3 text-center'>Log in to rent a car</h1>
                     <div id="loginemail" className='flex rounded-lg p-3 border-[1.5px] border-gray-400 items-center mt-8'>
                         <FaEnvelope className='mr-4 text-gray-500' />
-                        <input required name="email" className='outline-none font-thin text-[1rem] bg-none' placeholder='Name' type="text"/>
+                        <input required name="email" className='outline-none font-thin text-[1rem] bg-none' placeholder='Email' type="text"/>
                     </div>
                     <div className="accounterror" id="loginemailerror"></div>
                     <div id="loginpassword" className='relative flex rounded-lg p-3 border-[1.5px] border-gray-400 items-center'>
