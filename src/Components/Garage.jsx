@@ -22,6 +22,20 @@ const Garage = ({cartitems, setcartitems}) => {
     const [purchased, setpurchased] = useState(false);
     const [pickuptime, setpickuptime] = useState('');
     const [dropofftime, setdropofftime] = useState('');
+
+    //today's date
+    let today = new Date();
+    let dd = String(today.getDate()).padStart(2, '0');
+    let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    let yyyy = today.getFullYear();
+    today = yyyy + '-' + mm + '-' + dd;
+
+    function differenceBetweenDays(day1, day2) {
+        let difference = (new Date(day2) - new Date(day1));
+        let days = difference/(1000 * 3600 * 24);
+        return days;
+    }
+
     const removeclick = (item) => {
         let newcartitems = cartitems.filter(car => car !== item);
         setcartitems(newcartitems);
@@ -83,7 +97,27 @@ const Garage = ({cartitems, setcartitems}) => {
             }, 3200);
             return;
         };
-        paymentref.current.style.display = 'flex';
+        if (totaldays === 0) {
+            let div = document.createElement('div');
+            div.textContent = 'Dropoff date must be different from pickup date';
+            div.classList.add('popup');
+            document.body.append(div);
+            setTimeout(() => {
+                div.remove();
+            }, 3200);
+            return;
+        };
+        if (differenceBetweenDays(today, dates.date1) < 0 || differenceBetweenDays(today, dates.date2) < 0) {
+            let div = document.createElement('div');
+            div.textContent = 'Pickup date and dropoff date cannot be before today\'s date';
+            div.classList.add('popup');
+            document.body.append(div);
+            setTimeout(() => {
+                div.remove();
+            }, 3200);
+            return;
+        }
+        paymentref.current.style.display = 'flex'; //makes purchase page visible
     }
     const confirmpurchase = () => {
         setpurchased(true);
