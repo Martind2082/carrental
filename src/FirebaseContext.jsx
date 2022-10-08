@@ -1,6 +1,6 @@
 import React from "react";
 import { auth, db } from "./firebase";
-import { onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, GoogleAuthProvider, signInWithPopup, sendPasswordResetEmail } from 'firebase/auth';
+import { onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, GoogleAuthProvider, signInWithPopup, sendPasswordResetEmail, updateEmail, updatePassword } from 'firebase/auth';
 import { useEffect, useState } from "react";
 import { addDoc, collection, doc, onSnapshot, updateDoc } from "firebase/firestore";
 import list from './cars.json';
@@ -170,8 +170,32 @@ const FirebaseContext = ({children, setcartitems, cartitems}) => {
                 }
             });
     } 
+    function updateemail(newemail) {
+        updateEmail(auth.currentUser, newemail)
+            .catch((err) => {
+                let popup = document.createElement('div');
+                popup.classList.add('popup');
+                popup.textContent = err.toString();
+                document.body.append(popup);
+                setTimeout(() => {
+                    popup.remove();
+                }, 5000);
+            })
+    }
+    function updatepassword(newpassword) {
+        updatePassword(user, newpassword)
+            .catch((err) => {
+                let popup = document.createElement('div');
+                popup.classList.add('popup');
+                popup.textContent = err.toString();
+                document.body.append(popup);
+                setTimeout(() => {
+                    popup.remove();
+                }, 5000);
+            })
+    }
     return (
-        <firebasecontext.Provider value={{user, resetpass, setresetpass, createaccount, login, signout, signinwithgoogle, signedinuser, setsignedinuser, uid, setUid, purchasehistory, setpurchasehistory, loginerror, setloginerror, signuperror, setsignuperror, resetpassword}}>
+        <firebasecontext.Provider value={{user, resetpass, updateemail, updatepassword, setresetpass, createaccount, login, signout, signinwithgoogle, signedinuser, setsignedinuser, uid, setUid, purchasehistory, setpurchasehistory, loginerror, setloginerror, signuperror, setsignuperror, resetpassword}}>
             {!loading && children}
         </firebasecontext.Provider>
     );
