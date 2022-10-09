@@ -60,6 +60,7 @@ const FirebaseContext = ({children, setcartitems, cartitems}) => {
         e.preventDefault();
         signInWithEmailAndPassword(auth, email, password)
             .catch(err => {
+                console.log(err);
                 if ((err.toString().split(' ').slice(-1).join('') === '(auth/invalid-email).')) {
                     setloginerror('Invalid Email');
                     return;
@@ -133,6 +134,10 @@ const FirebaseContext = ({children, setcartitems, cartitems}) => {
         return unsub;
     }, [user])
     useEffect(() => {
+        console.log('uid changed', uid);
+    }, [uid])
+
+    useEffect(() => {
         if (user) {
             setloginerror('');
             setsignuperror('');
@@ -171,7 +176,9 @@ const FirebaseContext = ({children, setcartitems, cartitems}) => {
                 }
             });
     } 
-    function updateemail(newemail) {
+    function updateemail(newemail, oldpassword, e) {
+        login(user.email, oldpassword, e)
+        setloginerror('');
         updateEmail(auth.currentUser, newemail).then(() => {
             updateDoc(doc(db, 'names', uid), {
                 email: newemail
@@ -179,13 +186,8 @@ const FirebaseContext = ({children, setcartitems, cartitems}) => {
         })
             .catch((err) => {
                 if (err.toString() === "FirebaseError: Firebase: Error (auth/requires-recent-login).") {
-                    let popup = document.createElement('div');
-                    popup.classList.add('popup');
-                    popup.textContent = 'Must be logged in recently. Please sign out and sign in and try again';
-                    document.body.append(popup);
-                    setTimeout(() => {
-                        popup.remove();
-                    }, 5000);
+                    console.log('requires recent login error');
+                    updateemail(newemail, oldpassword, e);
                     return;
                 }
                 let popup = document.createElement('div');
@@ -197,17 +199,14 @@ const FirebaseContext = ({children, setcartitems, cartitems}) => {
                 }, 5000);
             })
     }
-    function updatepassword(newpassword) {
+    function updatepassword(newpassword, oldpassword, e) {
+        login(user.email, oldpassword, e)
+        setloginerror('');
         updatePassword(user, newpassword)
             .catch((err) => {
                 if (err.toString() === "FirebaseError: Firebase: Error (auth/requires-recent-login).") {
-                    let popup = document.createElement('div');
-                    popup.classList.add('popup');
-                    popup.textContent = 'Must be logged in recently. Please sign out and sign in and try again';
-                    document.body.append(popup);
-                    setTimeout(() => {
-                        popup.remove();
-                    }, 5000);
+                    console.log('requires recent login error')
+                    updatepassword(newpassword, oldpassword, e)
                     return;
                 }
                 let popup = document.createElement('div');

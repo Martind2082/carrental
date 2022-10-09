@@ -11,7 +11,6 @@ import {GiHomeGarage} from 'react-icons/gi'
 import {BiMenu} from 'react-icons/bi'
 import { deleteUser } from "firebase/auth";
 import Updateinfo from "./Updateinfo";
-import { useEffect } from "react";
 
 const Header = () => {
     let navigate = useNavigate();
@@ -100,7 +99,7 @@ const Header = () => {
         <header>
             <div className='absolute top-0 right-0 flex flex-col items-end pr-10 bg-white h-[170%] z-[20]' style={{width: width > 900 ? '30%' : '100%', minWidth: '400px', transition: "all 400ms ease", visibility: accountdisplay(), transform: accounttranslate()}}>
                 <BsXLg onClick={() => setAccount(false)} className='hover absolute right-10 top-4 text-3xl z-[10000]'/>
-                <p className='text-center text-3xl font-bold mt-[5rem] mb-[2rem]'>Account</p>
+                <p className='text-center text-3xl font-bold mt-[3.5rem] mb-[2rem]'>Account</p>
                 <div className='flex flex-col items-end justify-center'>
                     <p className='font-bold text-2xl text-center mb-1'>Display name:</p>
                     <input style={{display: 'none'}} type="text" ref={editinputRef} onChange={(e) => setEditvalue(e.target.value)} value={editvalue} className="border-2 border-black rounded-lg px-1 w-[90%]"/>
@@ -115,11 +114,11 @@ const Header = () => {
                 <div className="hidden" ref={updateemailRef}>
                     <Updateinfo updateemailref={updateemailRef} updatepasswordref={updatepasswordRef} setAccount={setAccount} name="Email"/>
                 </div>
-                <button onClick={() => updatebuttonclick('password')} className='mt-5 mb-5 hover:underline border-2 border-orange-700 rounded-lg px-5 py-1 text-orange-700 font-bold'>Password reset</button>
+                <button onClick={() => updatebuttonclick('password')} className='mt-5 hover:underline border-2 border-orange-700 rounded-lg px-5 py-1 text-orange-700 font-bold'>Password reset</button>
                 <div className="hidden" ref={updatepasswordRef}>
                     <Updateinfo updateemailref={updateemailRef} updatepasswordref={updatepasswordRef} setAccount={setAccount} name="Password" />
                 </div>
-                <button onClick={() => {signout(); setAccount(false)}} className='my-10 hover:underline border-2 border-orange-400 rounded-lg px-5 py-1 text-orange-400 font-bold'>Sign out</button>
+                <button onClick={() => {signout(); setAccount(false)}} className='mt-8 mb-5 hover:underline border-2 border-orange-400 rounded-lg px-5 py-1 text-orange-400 font-bold'>Sign out</button>
                 <button onClick={() => {signout(); deleteAccount(); setAccount(false);}} className='hover:underline border-2 border-orange-400 rounded-lg px-5 py-1 text-orange-400 font-bold'>Delete Account</button>
             </div>
             {
