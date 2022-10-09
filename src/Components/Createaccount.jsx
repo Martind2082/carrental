@@ -48,16 +48,16 @@ const Createaccount = () => {
                     <h1 className='text-3xl mb-3 text-center'>Create account to rent a car</h1>
                     <div className='flex rounded-lg p-3 border-[1.5px] border-gray-400 items-center mb-8 mt-8'>
                         <FaUser className='mr-4' />
-                        <input required name="name" className='outline-none font-thin text-[1rem]' placeholder='Name' type="text"/>
+                        <input required name="name" className='outline-none font-thin text-[1rem] w-[85%]' placeholder='Name' type="text"/>
                     </div>
                     <div id="signupemail" className='flex rounded-lg p-3 border-[1.5px] border-gray-400 items-center'>
                         <FaEnvelope className='mr-4' />
-                        <input required name="email" className='outline-none font-thin text-[1rem]' placeholder='Email' type="text"/>
+                        <input required name="email" className='outline-none font-thin text-[1rem] w-[85%]' placeholder='Email' type="text"/>
                     </div>
                     <div className="accounterror" id="signupemailerror"></div>
                     <div id="signuppassword" className='relative flex rounded-lg p-3 border-[1.5px] border-gray-400 items-center'>
                         <FaLock className='mr-4' />
-                        <input required name="password" className='outline-none font-thin text-[1rem]' placeholder='Password' type={seepassword ? 'text' : 'password'}/>
+                        <input required name="password" className='outline-none font-thin text-[1rem] w-[75%]' placeholder='Password' type={seepassword ? 'text' : 'password'}/>
                         {seepassword ? <FaEye className='hover absolute right-4 text-2xl text-gray-500' onClick={() => setseepassword(!seepassword)}/> : <FaEyeSlash className='hover absolute right-4 text-2xl text-gray-500' onClick={() => setseepassword(!seepassword)}/>}
                     </div>
                     <div className="accounterror" id="signuppassworderror"></div>  

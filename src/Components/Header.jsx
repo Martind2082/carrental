@@ -98,7 +98,7 @@ const Header = () => {
     }
     return (
         <header>
-            <div className='absolute top-0 right-0 flex flex-col items-end pr-10 bg-white h-screen z-[20]' style={{width: width > 900 ? '30%' : '100%', transition: "all 400ms ease", visibility: accountdisplay(), transform: accounttranslate()}}>
+            <div className='absolute top-0 right-0 flex flex-col items-end pr-10 bg-white h-[170%] z-[20]' style={{width: width > 900 ? '30%' : '100%', minWidth: '400px', transition: "all 400ms ease", visibility: accountdisplay(), transform: accounttranslate()}}>
                 <BsXLg onClick={() => setAccount(false)} className='hover absolute right-10 top-4 text-3xl z-[10000]'/>
                 <p className='text-center text-3xl font-bold mt-[5rem] mb-[2rem]'>Account</p>
                 <div className='flex flex-col items-end justify-center'>
@@ -107,13 +107,17 @@ const Header = () => {
                     <div style={{display: 'block'}} ref={signedinuserRef} className='text-2xl ml-4 text-center mb-1'>{signedinuser}</div>
                     <button onClick={handleEditing} className='hover:underline border-2 mt-1 border-red-300 rounded-lg px-5 text-red-500 font-bold'>{!editing ? 'Edit' : editvalue.length === 0 ? 'Cancel' : 'Done'}</button>
                 </div>
+                <div className="flex flex-col items-end mt-3">
+                    <p className="font-bold text-xl">Email:</p>
+                    <div className="text-[1.2rem]">{user?.email}</div>
+                </div>
                 <button onClick={() => updatebuttonclick('email')} className='mt-10 hover:underline border-2 border-orange-700 rounded-lg px-5 py-1 text-orange-700 font-bold'>Email reset</button>
                 <div className="hidden" ref={updateemailRef}>
-                    <Updateinfo setAccount={setAccount} name="Email"/>
+                    <Updateinfo updateemailref={updateemailRef} updatepasswordref={updatepasswordRef} setAccount={setAccount} name="Email"/>
                 </div>
                 <button onClick={() => updatebuttonclick('password')} className='mt-5 mb-5 hover:underline border-2 border-orange-700 rounded-lg px-5 py-1 text-orange-700 font-bold'>Password reset</button>
                 <div className="hidden" ref={updatepasswordRef}>
-                    <Updateinfo setAccount={setAccount} name="Password" />
+                    <Updateinfo updateemailref={updateemailRef} updatepasswordref={updatepasswordRef} setAccount={setAccount} name="Password" />
                 </div>
                 <button onClick={() => {signout(); setAccount(false)}} className='my-10 hover:underline border-2 border-orange-400 rounded-lg px-5 py-1 text-orange-400 font-bold'>Sign out</button>
                 <button onClick={() => {signout(); deleteAccount(); setAccount(false);}} className='hover:underline border-2 border-orange-400 rounded-lg px-5 py-1 text-orange-400 font-bold'>Delete Account</button>

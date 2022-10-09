@@ -173,6 +173,16 @@ const FirebaseContext = ({children, setcartitems, cartitems}) => {
     function updateemail(newemail) {
         updateEmail(auth.currentUser, newemail)
             .catch((err) => {
+                if (err.toString() === "FirebaseError: Firebase: Error (auth/requires-recent-login).") {
+                    let popup = document.createElement('div');
+                    popup.classList.add('popup');
+                    popup.textContent = 'Must be logged in recently. Please sign out and sign in and try again';
+                    document.body.append(popup);
+                    setTimeout(() => {
+                        popup.remove();
+                    }, 5000);
+                    return;
+                }
                 let popup = document.createElement('div');
                 popup.classList.add('popup');
                 popup.textContent = err.toString();
@@ -185,6 +195,16 @@ const FirebaseContext = ({children, setcartitems, cartitems}) => {
     function updatepassword(newpassword) {
         updatePassword(user, newpassword)
             .catch((err) => {
+                if (err.toString() === "FirebaseError: Firebase: Error (auth/requires-recent-login).") {
+                    let popup = document.createElement('div');
+                    popup.classList.add('popup');
+                    popup.textContent = 'Must be logged in recently. Please sign out and sign in and try again';
+                    document.body.append(popup);
+                    setTimeout(() => {
+                        popup.remove();
+                    }, 5000);
+                    return;
+                }
                 let popup = document.createElement('div');
                 popup.classList.add('popup');
                 popup.textContent = err.toString();

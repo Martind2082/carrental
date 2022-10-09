@@ -50,12 +50,12 @@ const Login = () => {
                     <h1 className='text-3xl mb-3 text-center'>Log in to rent a car</h1>
                     <div id="loginemail" className='flex rounded-lg p-3 border-[1.5px] border-gray-400 items-center mt-8'>
                         <FaEnvelope className='mr-4 text-gray-500' />
-                        <input required name="email" className='outline-none font-thin text-[1rem] bg-none' placeholder='Email' type="text"/>
+                        <input required name="email" className='outline-none font-thin text-[1rem] bg-none w-[85%]' placeholder='Email' type="text"/>
                     </div>
                     <div className="accounterror" id="loginemailerror"></div>
                     <div id="loginpassword" className='relative flex rounded-lg p-3 border-[1.5px] border-gray-400 items-center'>
                         <FaLock className='mr-4 text-gray-500' />
-                        <input required name="password" className='outline-none font-thin text-[1rem]' placeholder='Password' type={seepassword ? 'text' : 'password'}/>
+                        <input required name="password" className='outline-none font-thin text-[1rem] w-[75%]' placeholder='Password' type={seepassword ? 'text' : 'password'}/>
                         {seepassword ? <FaEye className='hover absolute right-4 text-2xl text-gray-500' onClick={() => setseepassword(!seepassword)}/> : <FaEyeSlash className='hover absolute right-4 text-2xl text-gray-500' onClick={() => setseepassword(!seepassword)}/>}
                     </div>
                     <div className="accounterror" id="loginpassworderror"></div>

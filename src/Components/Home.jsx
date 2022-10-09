@@ -6,10 +6,8 @@ import 'swiper/css/pagination';
 import list from '../cars.json';
 import {useNavigate} from 'react-router-dom';
 import { useRef } from 'react';
-import {db} from '../firebase';
 import { useContext } from 'react';
 import {firebasecontext} from '../FirebaseContext';
-import { useEffect } from 'react';
 
 const Home = ({setSort}) => {
     const {carslist} = list;
@@ -23,6 +21,9 @@ const Home = ({setSort}) => {
         }
         setSort(sort);
         navigate(`/cars/${name}`)
+    }
+    function scrolltop() {
+        window.scrollTo(0, 0);
     }
     return (
         <div>
@@ -74,20 +75,20 @@ const Home = ({setSort}) => {
                     <p className='text-3xl font-bold' style={{marginRight: window.innerWidth > 900 ? '3rem' : '0', marginBottom: window.innerWidth > 900 ? '0' : '1rem'}}>Top Brands</p>
                     {
                         window.innerWidth > 900 ? <div className='flex'>
-                            <div><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Tesla_T_symbol.svg/800px-Tesla_T_symbol.svg.png"/></div>
-                            <div><img src="https://www.freepnglogos.com/uploads/toyota-logo-png/toyota-logos-brands-10.png" /></div>
-                            <div><img src="https://allcarbrandslist.com/wp-content/uploads/2020/12/Honda-Emblem.png" /></div>
-                            <div><img src="https://www.carlogos.org/car-logos/ford-logo-2003.png"/></div>
-                            <div><img src="https://logos-world.net/wp-content/uploads/2021/04/Subaru-Logo.png" /></div>
+                            <div onClick={() => {navigate("/cars/tesla"); scrolltop()}}><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Tesla_T_symbol.svg/800px-Tesla_T_symbol.svg.png"/></div>
+                            <div onClick={() => {navigate("/cars/toyota"); scrolltop()}}><img src="https://www.freepnglogos.com/uploads/toyota-logo-png/toyota-logos-brands-10.png" /></div>
+                            <div onClick={() => {navigate("/cars/honda"); scrolltop()}}><img src="https://allcarbrandslist.com/wp-content/uploads/2020/12/Honda-Emblem.png" /></div>
+                            <div onClick={() => {navigate("/cars/ford"); scrolltop()}}><img src="https://www.carlogos.org/car-logos/ford-logo-2003.png"/></div>
+                            <div onClick={() => {navigate("/cars/subaru"); scrolltop()}}><img src="https://logos-world.net/wp-content/uploads/2021/04/Subaru-Logo.png" /></div>
                         </div> : <div className='flex flex-col'>
                             <div className='flex justify-center mb-4 w-[80vw] ml-5'>
-                                <div><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Tesla_T_symbol.svg/800px-Tesla_T_symbol.svg.png"/></div>
-                                <div><img src="https://www.freepnglogos.com/uploads/toyota-logo-png/toyota-logos-brands-10.png" /></div>
-                                <div><img src="https://allcarbrandslist.com/wp-content/uploads/2020/12/Honda-Emblem.png" /></div>
+                                <div onClick={() => {navigate("/cars/tesla"); scrolltop()}}><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Tesla_T_symbol.svg/800px-Tesla_T_symbol.svg.png"/></div>
+                                <div onClick={() => {navigate("/cars/toyota"); scrolltop()}}><img src="https://www.freepnglogos.com/uploads/toyota-logo-png/toyota-logos-brands-10.png" /></div>
+                                <div onClick={() => {navigate("/cars/honda"); scrolltop()}}><img src="https://allcarbrandslist.com/wp-content/uploads/2020/12/Honda-Emblem.png" /></div>
                             </div>
                             <div className='flex justify-center w-[80vw] ml-5'>
-                                <div><img src="https://www.carlogos.org/car-logos/ford-logo-2003.png"/></div>
-                                <div><img src="https://logos-world.net/wp-content/uploads/2021/04/Subaru-Logo.png" /></div>
+                                <div onClick={() => {navigate("/cars/ford"); scrolltop()}}><img src="https://www.carlogos.org/car-logos/ford-logo-2003.png"/></div>
+                                <div onClick={() => {navigate("/cars/subaru"); scrolltop()}}><img src="https://logos-world.net/wp-content/uploads/2021/04/Subaru-Logo.png" /></div>
                             </div>
                         </div>
                     }

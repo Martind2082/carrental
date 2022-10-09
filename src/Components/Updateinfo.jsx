@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { useRef } from "react";
 import { firebasecontext } from "../FirebaseContext";
 
-const Updateinfo = ({name, setAccount}) => {
+const Updateinfo = ({name, setAccount, updateemailref, updatepasswordref}) => {
     const {updateemail, updatepassword} = useContext(firebasecontext);
     const formRef = useRef();
     function formsubmit(e) {
@@ -11,6 +11,9 @@ const Updateinfo = ({name, setAccount}) => {
             if (formRef.current.Emailone.value === formRef.current.Emailtwo.value) {
                 updateemail(formRef.current.Emailone.value);
                 setAccount(false);
+                formRef.current.Emailone.value = '';
+                formRef.current.Emailtwo.value = '';
+                updateemailref.current.style.display = 'none';
             } else {
                 let popup = document.createElement('div');
                 popup.classList.add('popup');
@@ -24,6 +27,9 @@ const Updateinfo = ({name, setAccount}) => {
             if (formRef.current.Passwordone.value === formRef.current.Passwordtwo.value) {
                 updatepassword(formRef.current.Passwordone.value);
                 setAccount(false);
+                formRef.current.Passwordone.value = '';
+                formRef.current.Passwordtwo.value = '';
+                updatepasswordref.current.style.display = 'none';
             } else {
                 let popup = document.createElement('div');
                 popup.classList.add('popup');
