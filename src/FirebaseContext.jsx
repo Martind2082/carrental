@@ -18,6 +18,7 @@ const FirebaseContext = ({children, setcartitems, cartitems}) => {
     const [signuperror, setsignuperror] = useState('');
     const [resetpass, setresetpass] = useState('');
 
+
     const colRef = collection(db, "names");
     useEffect(() => {
         const unsub = onAuthStateChanged(auth, (user) => {
@@ -171,7 +172,11 @@ const FirebaseContext = ({children, setcartitems, cartitems}) => {
             });
     } 
     function updateemail(newemail) {
-        updateEmail(auth.currentUser, newemail)
+        updateEmail(auth.currentUser, newemail).then(() => {
+            updateDoc(doc(db, 'names', uid), {
+                email: newemail
+            })
+        })
             .catch((err) => {
                 if (err.toString() === "FirebaseError: Firebase: Error (auth/requires-recent-login).") {
                     let popup = document.createElement('div');

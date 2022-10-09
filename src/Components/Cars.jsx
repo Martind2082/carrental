@@ -21,6 +21,9 @@ const Cars = ({rating}) => {
         brands.push(brand);
     }
     brands.sort();
+    function scrolltop() {
+        window.scrollTo(0, 0);
+    }
     return (
         <div className='translate-y-[15vh] px-10'>
             <p className='text-3xl mb-5'>All Available Cars</p>
@@ -35,7 +38,7 @@ const Cars = ({rating}) => {
                                         window.innerWidth > 900 ? <div className='flex'>
                                             {
                                                 obj[model].map(car => {
-                                                    return <div onClick={() => navigate(`/car/${car.id}`)} key={car.name} className="w-[25%] shadow-md hover:shadow-2xl mr-8 mb-10">
+                                                    return <div onClick={() => {navigate(`/car/${car.id}`); scrolltop()}} key={car.name} className="w-[25%] shadow-md hover:shadow-2xl mr-8 mb-10">
                                                         <img className='h-[30vh] object-cover hover' src={car.image}/>
                                                         <div className='flex justify-evenly items-center py-3'>
                                                             <div className='font-bold'>{car.name}</div>
@@ -55,7 +58,7 @@ const Cars = ({rating}) => {
                                             {
                                                 obj[model].map(car => {
                                                     return <SwiperSlide key={car.name}>
-                                                        <div onClick={() => navigate(`/car/${car.id}`)} className='w-[90%] h-full shadow-md hover:shadow-2xl'>
+                                                        <div onClick={() => {navigate(`/car/${car.id}`); scrolltop()}} className='w-[90%] h-full shadow-md hover:shadow-2xl'>
                                                             <img src={car.image} className='h-[30vh] w-[100%] object-cover hover'/>
                                                             <div className='flex justify-evenly items-center py-3 mb-[3rem]'>
                                                                 <div className='font-bold'>{car.name}</div>
@@ -78,7 +81,7 @@ const Cars = ({rating}) => {
                                         {
                                             obj[model].map(car => {
                                                 return <SwiperSlide key={car.name}>
-                                                    <div onClick={() => navigate(`/car/${car.id}`)} className='w-[90%] h-full shadow-md hover:shadow-2xl'>
+                                                    <div onClick={() => {navigate(`/car/${car.id}`); scrolltop()}} className='w-[90%] h-full shadow-md hover:shadow-2xl'>
                                                         <img src={car.image} className='h-[30vh] w-[100%] object-cover hover'/>
                                                         <div className='flex justify-evenly items-center py-3 mb-[3rem]'>
                                                             <div className='font-bold'>{car.name}</div>

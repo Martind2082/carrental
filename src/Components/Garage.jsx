@@ -152,7 +152,7 @@ const Garage = ({cartitems, setcartitems}) => {
         setpurchasehistory("");
     }
     return (
-        <div className="translate-y-[6rem] w-[90%] m-auto">
+        <div className="translate-y-[6rem] w-[100%] m-auto">
             <div ref={paymentref} className='fixed left-2/4 top-[0%] -translate-x-2/4 px-8 py-4 hidden rounded-[30px] border-2 border-gray-500 bg-white' style={{width: width > 900 ? '50%' : '90%', zIndex: '50'}}>
                 {
                     purchased ? <div className='flex flex-col items-center justify-center mx-auto'>
@@ -231,11 +231,11 @@ const Garage = ({cartitems, setcartitems}) => {
                     </div>
                 }
             </div>
-            <div className="text-3xl font-bold flex justify-between">{cartitems.length === 0 ? <div>Garage</div> : <div className='mb-8'>
+            <div className="text-3xl font-bold flex justify-between w-[95%] mx-auto">{cartitems.length === 0 ? <div>Garage</div> : <div className='mb-8'>
                 <p>Cars</p>
                 <p onClick={removeallclick} className='text-red-400 hover hover:underline text-xl font-normal'>Remove all Cars</p>
                 </div>}
-                <div onClick={purchasehistoryclick} className='text-white hover z-[1] bg-gradient-to-r from-blue-400 to-blue-500 py-3 px-6 rounded-[20px] font-normal text-xl h-full' style={{}}>Purchase History</div>
+                <div onClick={purchasehistoryclick} className='text-white hover z-[1] bg-gradient-to-r from-blue-400 to-blue-500 py-3 px-6 rounded-[20px] font-normal text-xl h-full'>Purchase History</div>
             </div>
             <div ref={purchasehistoryref} className="z-[1] pb-8 overflow-auto hidden rounded-[15px] border-2 border-blue-500 fixed w-[80%] h-[65vh] left-[50%] right-[50%] translate-x-[-50%] bg-white" style={{}}>
                 <BsXLg className='hover absolute right-[1.5rem] top-[1rem] text-2xl z-[1]' onClick={() => purchasehistoryref.current.style.display = 'none'}/>
