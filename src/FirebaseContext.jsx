@@ -17,6 +17,7 @@ const FirebaseContext = ({children, setcartitems, cartitems}) => {
     const [loginerror, setloginerror] = useState('');
     const [signuperror, setsignuperror] = useState('');
     const [resetpass, setresetpass] = useState('');
+    const [newuserbyupdateprofile, setnewuserbyupdateprofile] = useState(false);
 
 
     const colRef = collection(db, "names");
@@ -92,7 +93,8 @@ const FirebaseContext = ({children, setcartitems, cartitems}) => {
     }
     useEffect(() => {
         const unsub = onSnapshot(collection(db, "names"), snapshot => {
-            if (user) {
+            if (user && newuserbyupdateprofile === false) {
+                console.log('it is false', newuserbyupdateprofile);
                 for (let i = 0; i < snapshot.docs.length; i++) {
                     if (snapshot.docs[i].data().email === user.email) {
                         setUid(snapshot.docs[i].id);
@@ -177,13 +179,19 @@ const FirebaseContext = ({children, setcartitems, cartitems}) => {
             });
     } 
     function updateemail(newemail, oldpassword, e) {
-        login(user.email, oldpassword, e)
-        setloginerror('');
-        updateEmail(auth.currentUser, newemail).then(() => {
-            updateDoc(doc(db, 'names', uid), {
-                email: newemail
-            })
-        })
+        setnewuserbyupdateprofile(true)
+        console.log('it is true');
+        signInWithEmailAndPassword(auth, user.email, oldpassword)
+            .then(() => {
+                setloginerror('');
+                console.log('no login error');
+                setnewuserbyupdateprofile(false);
+                updateEmail(auth.currentUser, newemail).then(() => {
+                    updateDoc(doc(db, 'names', uid), {
+                        email: newemail
+                    })
+                })
+            })       
             .catch((err) => {
                 if (err.toString() === "FirebaseError: Firebase: Error (auth/requires-recent-login).") {
                     console.log('requires recent login error');
@@ -197,12 +205,15 @@ const FirebaseContext = ({children, setcartitems, cartitems}) => {
                 setTimeout(() => {
                     popup.remove();
                 }, 5000);
+                return; 
             })
     }
     function updatepassword(newpassword, oldpassword, e) {
+        setnewuserbyupdateprofile(true);
         login(user.email, oldpassword, e)
         setloginerror('');
         updatePassword(user, newpassword)
+            .then(() => setnewuserbyupdateprofile(false))
             .catch((err) => {
                 if (err.toString() === "FirebaseError: Firebase: Error (auth/requires-recent-login).") {
                     console.log('requires recent login error')
@@ -219,7 +230,7 @@ const FirebaseContext = ({children, setcartitems, cartitems}) => {
             })
     }
     return (
-        <firebasecontext.Provider value={{user, resetpass, updateemail, updatepassword, setresetpass, createaccount, login, signout, signinwithgoogle, signedinuser, setsignedinuser, uid, setUid, purchasehistory, setpurchasehistory, loginerror, setloginerror, signuperror, setsignuperror, resetpassword}}>
+        <firebasecontext.Provider value={{setnewuserbyupdateprofile, user, resetpass, updateemail, updatepassword, setresetpass, createaccount, login, signout, signinwithgoogle, signedinuser, setsignedinuser, uid, setUid, purchasehistory, setpurchasehistory, loginerror, setloginerror, signuperror, setsignuperror, resetpassword}}>
             {!loading && children}
         </firebasecontext.Provider>
     );

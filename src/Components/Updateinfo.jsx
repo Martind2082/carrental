@@ -6,7 +6,7 @@ import {FaEye, FaEyeSlash} from 'react-icons/fa';
 import { useState } from "react";
 
 const Updateinfo = ({name, setAccount, updateemailref, updatepasswordref}) => {
-    const {updateemail, updatepassword, loginerror} = useContext(firebasecontext);
+    const {updateemail, updatepassword, loginerror, setnewuserbyupdateprofile} = useContext(firebasecontext);
     const formRef = useRef();
     const [oldpasswordtext, setoldpasswordtext] = useState(false);
     const [confirmpasswordtext, setconfirmpasswordtext] = useState(false);
@@ -51,7 +51,8 @@ const Updateinfo = ({name, setAccount, updateemailref, updatepasswordref}) => {
     //when user updates email/password, if password is incorrect
     useEffect(() => {
         if (loginerror !== '') {
-
+            setnewuserbyupdateprofile(true);
+            console.log('is set to true');
             let popup = document.createElement('div');
             popup.classList.add('popup');
             popup.textContent = "Incorrect Password";
