@@ -33,7 +33,7 @@ const Header = () => {
         }
     }
     const accountdisplay = () => {
-        return account ? 'visible' : 'hidden'
+        return account ? 'flex' : 'none'
     }
     const accounttranslate = () => {
         return account ? 'translateX(0%)' : 'translateX(100%)'
@@ -96,8 +96,8 @@ const Header = () => {
         }
     }
     return (
-        <header>
-            <div className='absolute top-0 right-0 flex flex-col items-end pr-10 bg-white h-[170%] z-[20]' style={{width: width > 900 ? '30%' : '100%', minWidth: '400px', transition: "all 400ms ease", visibility: accountdisplay(), transform: accounttranslate()}}>
+        <header className="overflow-x-hidden">
+            <div className='absolute top-0 right-0 flex flex-col items-end pr-10 bg-white h-[170%] z-[20]' style={{width: width > 900 ? '30%' : '100%', minWidth: '400px', transition: "all 400ms ease", display: accountdisplay(), transform: accounttranslate()}}>
                 <BsXLg onClick={() => setAccount(false)} className='hover absolute right-10 top-4 text-3xl z-[10000]'/>
                 <p className='text-center text-3xl font-bold mt-[3.5rem] mb-[2rem]'>Account</p>
                 <div className='flex flex-col items-end justify-center'>

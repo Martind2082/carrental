@@ -9,7 +9,7 @@ body {
     overflow-x: hidden;
 }
 html {
-    overflow-x: initial;
+    overflow-x: hidden;
 }
 .hover {
     cursor: pointer;
