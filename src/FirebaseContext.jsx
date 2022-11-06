@@ -136,7 +136,6 @@ const FirebaseContext = ({children, setcartitems, cartitems}) => {
         return unsub;
     }, [user])
     useEffect(() => {
-        console.log('uid changed', uid);
     }, [uid])
 
     useEffect(() => {

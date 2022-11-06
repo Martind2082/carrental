@@ -8,9 +8,6 @@ body {
     font-family: 'Quicksand';
     overflow-x: hidden;
 }
-html {
-    overflow-x: hidden;
-}
 .hover {
     cursor: pointer;
 }
