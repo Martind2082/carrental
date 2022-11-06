@@ -3,6 +3,7 @@ import list from '../cars.json';
 import {useNavigate} from 'react-router-dom';
 
 const Carsinfo = ({sort, setSort, rating, setcartitems, cartitems}) => {
+    let width = window.innerWidth;
     let navigate = useNavigate();
     const {carslist} = list;
     const {name} = useParams();
@@ -31,13 +32,15 @@ const Carsinfo = ({sort, setSort, rating, setcartitems, cartitems}) => {
     }
     return (
         <div className='pb-[15rem]'>
-            <div className='text-3xl font-bold translate-y-[15vh] ml-20 flex justify-between w-[85%]'>
-                <div>{array.length} results for {name}</div>
-                <select onChange={(e) => setSort(e.target.value)} value={sort} className="text-xl border border-black">
-                    <option value="lowtohigh">Price low to high</option>
-                    <option value="hightolow">Price high to low</option>
-                    <option value="rating">Rating</option>
-                </select>
+            <div>
+                    <div className='text-3xl font-bold translate-y-[15vh] flex justify-between w-[85%]' style={{flexDirection: width > 900 ? 'row' : 'column', marginLeft: width > 900 ? '5rem' : '3rem'}}>
+                        <div>{array.length} results for {name}</div>
+                        <select onChange={(e) => setSort(e.target.value)} value={sort} className="text-xl border border-black" style={{marginTop: width > 900 ? '0' : '3rem'}}>
+                            <option value="lowtohigh">Price low to high</option>
+                            <option value="hightolow">Price high to low</option>
+                            <option value="rating">Rating</option>
+                        </select>
+                    </div>
             </div>
             <div className='grid gap-4 justify-center translate-y-[20vh]' style={{gridTemplateColumns: colsort()}}>
                 {array.map(val => <div className='hover carinfo font-bold shadow-lg pb-20 hover:shadow-2xl' key={val.id}>
