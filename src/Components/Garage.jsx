@@ -235,7 +235,7 @@ const Garage = ({cartitems, setcartitems}) => {
                 <p>Cars</p>
                 <p onClick={removeallclick} className='text-red-400 hover hover:underline text-[1.1rem] md:text-xl font-normal'>Remove all Cars</p>
                 </div>}
-                <div onClick={purchasehistoryclick} className='text-white hover mb-4 flex items-center justify-center w-[50%] max-w-[200px] text-[1rem] z-[1] bg-gradient-to-r from-blue-400 to-blue-700 rounded-[20px]'>Purchase History</div>
+                <div onClick={purchasehistoryclick} className='text-white hover mb-4 flex items-center justify-center w-[50%] max-w-[200px] text-[1rem] z-[1] bg-gradient-to-r py-[0.3rem] from-blue-400 to-blue-700 rounded-[20px]'>Purchase History</div>
             </div>
             {/* everything inside purchase history box */}
             <div ref={purchasehistoryref} className="z-[1] pb-8 overflow-auto hidden rounded-[15px] border-2 border-blue-500 fixed w-[80%] h-[65vh] left-[50%] right-[50%] translate-x-[-50%] bg-white" style={{}}>
