@@ -26,7 +26,11 @@ const Header = () => {
     const updatepasswordRef = useRef();
 
     const loginclick = () => {
-        menuclick();
+        if (menuref.current.style.opacity !== '0') {
+            menuref.current.style.transform = 'translateX(100%)';
+            menuref.current.style.opacity = '0';
+            menuref.current.style.visibility = 'hidden';
+        }
         if (user) {
             setAccount(true);
         } else {
@@ -100,9 +104,9 @@ const Header = () => {
         <header className="overflow-x-hidden">
             <div className='absolute top-0 right-0 flex flex-col items-end pr-10 bg-white h-[170%] z-[20]' style={{width: width > 900 ? '30%' : '100%', minWidth: '400px', transition: "all 400ms ease", display: accountdisplay(), transform: accounttranslate()}}>
                 <BsXLg onClick={() => setAccount(false)} className='hover absolute right-10 top-4 text-3xl z-[10000]'/>
-                <p className='text-center text-3xl font-bold mt-[3.5rem] mb-[2rem]'>Account</p>
+                <p className='text-center text-2xl md:text-3xl font-bold mt-[3.5rem] mb-[2rem]'>Account</p>
                 <div className='flex flex-col items-end justify-center'>
-                    <p className='font-bold text-2xl text-center mb-1'>Display name:</p>
+                    <p className='font-bold text-xl md:text-2xl text-center mb-1'>Display name:</p>
                     <input style={{display: 'none'}} type="text" ref={editinputRef} onChange={(e) => setEditvalue(e.target.value)} value={editvalue} className="border-2 border-black rounded-lg px-1 w-[90%]"/>
                     <div style={{display: 'block'}} ref={signedinuserRef} className='text-2xl ml-4 text-center mb-1'>{signedinuser}</div>
                     <button onClick={handleEditing} className='hover:underline border-2 mt-1 border-red-300 rounded-lg px-5 text-red-500 font-bold'>{!editing ? 'Edit' : editvalue.length === 0 ? 'Cancel' : 'Done'}</button>
@@ -132,19 +136,19 @@ const Header = () => {
                         <Link to="/garage"><GiHomeGarage className="hover text-[3rem]" style={{padding: '3'}}/></Link>
                         <div onClick={loginclick} className='hover:underline hover p-3 text-center'>{user ? 'Account' : 'Login | Sign up'}</div>
                     </div>
-                </div> : <div className="flex items-center w-screen h-[13vh] fixed font-bold z-[5]">
+                </div> : <div className="flex justify-evenly items-center w-screen h-[13vh] fixed font-bold z-[5]">
                     <div ref={menuref} className="absolute bg-slate-600 top-0 w-full h-[100vh]" style={{transition: 'all 400ms ease', transform: 'translateX(100%)', opacity: '0', visibility: "hidden"}}>
-                        <div className="w-full h-[80vh] flex flex-col items-center justify-evenly text-3xl">
+                        <div className="w-full h-[80vh] flex flex-col items-center justify-evenly text-xl">
                             <Link onClick={menuclick} to="/"><div className='text-white'>Home</div></Link>
                             <Link onClick={menuclick} to="/about"><div className='text-white text-center'>About us</div></Link>
                             <Link onClick={menuclick} to="/cars"><div className='text-white'>Cars</div></Link>
                             <Link onClick={menuclick} to="/garage" className="text-white">Garage</Link> 
                         </div>
                     </div>
-                    <img onClick={() => navigate("/")} className="hover h-full ml-[5%]" src={logo} />
+                    <img onClick={() => navigate("/")} className="hover h-[80%] ml-[5%]" src={logo} />
                     <div className="flex justify-between items-center z-[5]">
-                        <div onClick={loginclick} className='hover:underline hover p-3 text-2xl text-center'>{user ? 'Account' : 'Login | Sign up'}</div>
-                        <BiMenu onClick={menuclick} className="hover text-[2.5rem] mr-[1.5rem] ml-[0.5rem] z-[1]"/> 
+                        <div onClick={loginclick} className='hover:underline hover p-3 text-xl text-center'>{user ? 'Account' : 'Login | Sign up'}</div>
+                        <BiMenu onClick={menuclick} className="hover text-[2rem] mr-[1.5rem] ml-[0.5rem] z-[1]"/> 
                     </div>
                 </div>
             }

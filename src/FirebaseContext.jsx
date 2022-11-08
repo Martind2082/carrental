@@ -94,7 +94,6 @@ const FirebaseContext = ({children, setcartitems, cartitems}) => {
     useEffect(() => {
         const unsub = onSnapshot(collection(db, "names"), snapshot => {
             if (user && newuserbyupdateprofile === false) {
-                console.log('it is false', newuserbyupdateprofile);
                 for (let i = 0; i < snapshot.docs.length; i++) {
                     if (snapshot.docs[i].data().email === user.email) {
                         setUid(snapshot.docs[i].id);
@@ -179,11 +178,9 @@ const FirebaseContext = ({children, setcartitems, cartitems}) => {
     } 
     function updateemail(newemail, oldpassword, e) {
         setnewuserbyupdateprofile(true)
-        console.log('it is true');
         signInWithEmailAndPassword(auth, user.email, oldpassword)
             .then(() => {
                 setloginerror('');
-                console.log('no login error');
                 setnewuserbyupdateprofile(false);
                 updateEmail(auth.currentUser, newemail).then(() => {
                     updateDoc(doc(db, 'names', uid), {
@@ -193,7 +190,6 @@ const FirebaseContext = ({children, setcartitems, cartitems}) => {
             })       
             .catch((err) => {
                 if (err.toString() === "FirebaseError: Firebase: Error (auth/requires-recent-login).") {
-                    console.log('requires recent login error');
                     updateemail(newemail, oldpassword, e);
                     return;
                 }
@@ -215,7 +211,6 @@ const FirebaseContext = ({children, setcartitems, cartitems}) => {
             .then(() => setnewuserbyupdateprofile(false))
             .catch((err) => {
                 if (err.toString() === "FirebaseError: Firebase: Error (auth/requires-recent-login).") {
-                    console.log('requires recent login error')
                     updatepassword(newpassword, oldpassword, e)
                     return;
                 }

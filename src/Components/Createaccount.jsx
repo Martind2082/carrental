@@ -44,9 +44,9 @@ const Createaccount = () => {
     return (
         <div className='flex' style={{justifyContent: width > 700 ? 'start' : 'center'}}>
             <img className="w-screen h-screen opacity-60" src="https://www.dollar.com/~/media/Dollar/Images/Business/Government/0618-business-government-car-tire-road.ashx"/>
-            <div className='absolute top-[15vh] ml-[5%] p-10 border-black border-2 bg-white' style={{left: width > 700 ? '5%' : '0%', width: width > 700 ? '35%' : '90%'}}>
+            <div className='absolute top-[15vh] rounded-[15px] ml-[5%] p-10 border-black border-2 bg-white' style={{left: width > 700 ? '5%' : '0%', width: width > 700 ? '35%' : '90%'}}>
                 <form ref={form} onSubmit={(e) => createaccount(form.current.name.value, form.current.email.value, form.current.password.value, e)} className='font-bold text-[1.2rem]'>
-                    <h1 className='text-3xl mb-3 text-center'>Create account to rent a car</h1>
+                    <h1 className='text-2xl mb-3 text-center'>Create account to rent a car</h1>
                     <div className='flex rounded-lg p-3 border-[1.5px] border-gray-400 items-center mb-8 mt-8'>
                         <FaUser className='mr-4' />
                         <input required name="name" className='outline-none font-thin text-[1rem] w-[85%]' placeholder='Name' type="text"/>
@@ -62,14 +62,14 @@ const Createaccount = () => {
                         {seepassword ? <FaEye className='hover absolute right-4 text-2xl text-gray-500' onClick={() => setseepassword(!seepassword)}/> : <FaEyeSlash className='hover absolute right-4 text-2xl text-gray-500' onClick={() => setseepassword(!seepassword)}/>}
                     </div>
                     <div className="accounterror" id="signuppassworderror"></div>  
-                    <input value="Create Account" className='hover my-3 block bg-gradient-to-r from-blue-400 to-blue-500 text-white w-full rounded-[10px] py-2' type="submit" />
+                    <input value="Create Account" className='hover my-3 text-[1rem] md:text-[1.2rem] block bg-gradient-to-r from-blue-400 to-blue-500 text-white w-full rounded-[10px] py-2' type="submit" />
                     <div className="flex items-center my-4">
                         <div className='w-2/4 h-[1px] bg-gray-400'></div>
                         <p className='mx-2 text-gray-500 font-[900]'>OR</p>
                         <div className='w-2/4 h-[1px] bg-gray-400'></div>
                     </div>
                     <GoogleButton onClick={signinwithgoogle} className="relative mb-4 mt-5 left-2/4 -translate-x-2/4"/>
-                    <div className='text-center'>Have an account? <Link to="/login" onClick={resetsignuperrors}><span className='text-blue-600 hover:underline'>Log in</span></Link></div>
+                    <div className='text-center text-[1rem]'>Have an account? <Link to="/login" onClick={resetsignuperrors}><span className='text-blue-600 hover:underline'>Log in</span></Link></div>
                 </form>
             </div>
         </div>

@@ -72,7 +72,7 @@ const Home = ({setSort}) => {
 
             <div className='p-10 5'>
                 <div className='topbrands flex w-[80%] mx-auto mb-10 justify-center items-center' style={{flexDirection: window.innerWidth > 900 ? 'row' : 'column'}}>
-                    <p className='text-3xl font-bold' style={{marginRight: window.innerWidth > 900 ? '3rem' : '0', marginBottom: window.innerWidth > 900 ? '0' : '1rem'}}>Top Brands</p>
+                    <p className='text-2xl md:text-3xl font-bold' style={{marginRight: window.innerWidth > 900 ? '3rem' : '0', marginBottom: window.innerWidth > 900 ? '0' : '1rem'}}>Top Brands</p>
                     {
                         window.innerWidth > 900 ? <div className='flex'>
                             <div onClick={() => {navigate("/cars/tesla"); scrolltop()}}><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Tesla_T_symbol.svg/800px-Tesla_T_symbol.svg.png"/></div>
@@ -93,7 +93,7 @@ const Home = ({setSort}) => {
                         </div>
                     }
                 </div>
-                <p className='text-3xl font-bold text-center my-5 mt-18'>Most Rented Cars</p>
+                <p className='text-2xl md:text-3xl font-bold text-center my-5 mt-18'>Most Rented Cars</p>
                 {
                     window.innerWidth > 900 ? <Swiper id='swiper' className='shadow-xl'
                         modules={[Navigation, Pagination]}

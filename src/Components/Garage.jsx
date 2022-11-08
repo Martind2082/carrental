@@ -231,26 +231,27 @@ const Garage = ({cartitems, setcartitems}) => {
                     </div>
                 }
             </div>
-            <div className="text-3xl font-bold flex justify-between w-[95%] mx-auto">{cartitems.length === 0 ? <div>Garage</div> : <div className='mb-8'>
+            <div className="text-2xl md:text-3xl font-bold flex justify-between w-[95%] mx-auto" style={{flexDirection: width > 900 ? 'row': 'column'}}>{cartitems.length === 0 ? <div>Garage</div> : <div className='mb-2'>
                 <p>Cars</p>
-                <p onClick={removeallclick} className='text-red-400 hover hover:underline text-xl font-normal'>Remove all Cars</p>
+                <p onClick={removeallclick} className='text-red-400 hover hover:underline text-[1.1rem] md:text-xl font-normal'>Remove all Cars</p>
                 </div>}
-                <div onClick={purchasehistoryclick} className='text-white hover z-[1] bg-gradient-to-r from-blue-400 to-blue-500 py-3 px-6 rounded-[20px] font-normal text-xl h-full'>Purchase History</div>
+                <div onClick={purchasehistoryclick} className='text-white hover mb-4 flex items-center justify-center w-[50%] max-w-[200px] text-[1rem] z-[1] bg-gradient-to-r from-blue-400 to-blue-700 rounded-[20px]'>Purchase History</div>
             </div>
+            {/* everything inside purchase history box */}
             <div ref={purchasehistoryref} className="z-[1] pb-8 overflow-auto hidden rounded-[15px] border-2 border-blue-500 fixed w-[80%] h-[65vh] left-[50%] right-[50%] translate-x-[-50%] bg-white" style={{}}>
                 <BsXLg className='hover absolute right-[1.5rem] top-[1rem] text-2xl z-[1]' onClick={() => purchasehistoryref.current.style.display = 'none'}/>
-                <p className='text-center text-[2rem] my-2 relative left-2/4 -translate-x-2/4' style={{width: width > 540 ? '100%' : '200px' }}>Purchase History</p>
+                <p className='text-center sm:text-[1.5rem] text-[2rem] my-2 relative left-2/4 -translate-x-2/4' style={{width: width > 540 ? '100%' : '200px' }}>Purchase History</p>
                 {purchasehistory.length !== 0 && <div onClick={clearpurchasehistory} className='hover:underline hover text-red-300 ml-2 font-bold text-4'>Clear history</div>}
                 <div id="purchasehistorycontainer" className='mt-4'>
                     {purchasehistoryarray.toString().length !== 0 ? <div>
                         {
-                        purchasehistoryarray.map(num => <div key={num}>
+                        purchasehistoryarray.map(num => <div key={num + 'history'}>
                             {
-                                width > 600 ? <div key={num} className="flex h-[125px] border-b-gray-500 border-b-[1.5px]">
+                                width > 600 ? <div className="flex h-[125px] border-b-gray-500 border-b-[1.5px]">
                                 <img onClick={() => navigate(`/car/${num}`)} className='hover w-[200px] object-cover' src={carslist[num].image}/>
                                 <div className='font-bold ml-4 mt-2 text-2xl'>{carslist[num].name}</div>
                                 <div className='font-bold text-right w-full absolute translate-x-[-5%] mt-2 text-2xl'>{carslist[num].rent} per day</div>
-                            </div> : <div key={num} className="flex w-full h-[125px] border-b-gray-500 border-b-[1.5px]">
+                            </div> : <div className="flex w-full h-[125px] border-b-gray-500 border-b-[1.5px]">
                                 <img onClick={() => navigate(`/car/${num}`)} className='hover w-[50%] object-cover' src={carslist[num].image}/>
                                 <div className='w-2/4'>
                                     <div className='font-bold text-center'>{carslist[num].name}</div>
@@ -277,14 +278,14 @@ const Garage = ({cartitems, setcartitems}) => {
                             cartitems.map(item => <div key={item.id} className='flex shadow-xl hover:shadow-2xl mb-8' style={{flexDirection: width > 900 ? 'row' : 'column'}}>
                                 <img onClick={() => navigate(`/car/${item.id}`)} className='hover' style={{width: width > 900 ? '50%' : '100%'}} src={item.image}/>
                                 <div className='flex flex-col text-xl font-bold text-black ml-4'>
-                                    <div className='text-2xl mt-3'>{item.name}</div>
-                                    <div className='my-4'>{item.rent} per day</div>
-                                    <p onClick={() => removeclick(item)} className='text-red-400 hover hover:underline mb-4'>Remove</p>
+                                    <div className='text-xl md:text-2xl mt-3'>{item.name}</div>
+                                    <div className='text-[1rem] md:text-xl my-4'>{item.rent} per day</div>
+                                    <p onClick={() => removeclick(item)} className='text-red-400 text-[1rem] hover hover:underline mb-4'>Remove</p>
                                 </div>
                             </div>)
                         }
                     </div>
-                    <div className='shadow-xl border-[1px] border-gray-400 text-2xl px-6' style={{width: width > 900 ? '40%' : '100%'}}>
+                    <div className='shadow-xl border-[1px] border-gray-400 text-xl md:text-2xl px-6' style={{width: width > 900 ? '40%' : '100%'}}>
                         <div className='my-3 font-bold'>{cartitems.length} {cartitems.length === 1 ? 'car' : 'cars'}</div>
                         <div className='flex justify-between'style={{flexDirection: width > 1000 ? 'row' : 'column'}}>
                             <div className='flex flex-col'>
@@ -343,7 +344,7 @@ const Garage = ({cartitems, setcartitems}) => {
                             </div>
                         </div>
                         <div>{totaldays} {totaldays === 1 ? 'day' : 'days'}: <span className='font-bold'>{total}</span> total</div>
-                        <button onClick={proceedcheckout} className='w-full my-4 text-xl py-3 bg-gradient-to-r from-blue-400 to-blue-500 font-bold text-white rounded-[20px]'>{user ? 'Proceed to Checkout' : 'Sign in to complete Checkout'}</button>
+                        <button onClick={proceedcheckout} className='w-full my-4 text-[1rem] md:text-xl py-2 md:py-3 bg-gradient-to-r from-blue-400 to-blue-500 font-bold text-white rounded-[20px]'>{user ? 'Proceed to Checkout' : 'Sign in to complete Checkout'}</button>
                     </div>
                 </div>
             }

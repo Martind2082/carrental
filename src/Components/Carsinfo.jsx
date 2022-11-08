@@ -17,6 +17,9 @@ const Carsinfo = ({sort, setSort, rating, setcartitems, cartitems}) => {
     }
     const colsort = () => {
         let length = array.length;
+        if (width < 700) {
+            return "repeat(2, 45%)";
+        }
         if (length > 3) {
             return "repeat(4, 23%)";
         } else {
@@ -32,32 +35,32 @@ const Carsinfo = ({sort, setSort, rating, setcartitems, cartitems}) => {
     }
     return (
         <div className='pb-[15rem]'>
-            <div>
-                    <div className='text-3xl font-bold translate-y-[15vh] flex justify-between w-[85%]' style={{flexDirection: width > 900 ? 'row' : 'column', marginLeft: width > 900 ? '5rem' : '3rem'}}>
-                        <div>{array.length} results for {name}</div>
-                        <select onChange={(e) => setSort(e.target.value)} value={sort} className="text-xl border border-black" style={{marginTop: width > 900 ? '0' : '3rem'}}>
-                            <option value="lowtohigh">Price low to high</option>
-                            <option value="hightolow">Price high to low</option>
-                            <option value="rating">Rating</option>
-                        </select>
-                    </div>
-            </div>
+                <div className='text-2xl font-bold translate-y-[15vh] flex w-[85%]' style={{flexDirection: width > 900 ? 'row' : 'column', marginLeft: width > 900 ? '5rem' : '7.5%'}}>
+                    <div>{array.length} results for {name}</div>
+                    <select onChange={(e) => setSort(e.target.value)} value={sort} className="text-xl border border-black" style={{marginTop: width > 900 ? '0' : '1rem', marginLeft: width > 900 ? '3rem' : '0rem'}}>
+                        <option value="lowtohigh">Price low to high</option>
+                        <option value="hightolow">Price high to low</option>
+                        <option value="rating">Rating</option>
+                    </select>
+                </div>
             <div className='grid gap-4 justify-center translate-y-[20vh]' style={{gridTemplateColumns: colsort()}}>
-                {array.map(val => <div className='hover carinfo font-bold shadow-lg pb-20 hover:shadow-2xl' key={val.id}>
-                    <div className='text-2xl font-bold my-3'>{val.name}</div>
+                {array.map(val => <div className='hover carinfo font-bold shadow-lg pb-[10rem] hover:shadow-2xl' key={val.id}>
+                    <div className='text-xl md:text-2xl font-bold my-3'>{val.name}</div>
                     <img onClick={() => navigate(`/car/${val.id}`)} src={val.image} className="h-[60%] w-full object-cover"/>
-                    <div className='mt-4 ml-6 flex items-center'><span className='mr-2'>Rating:</span> {rating(val.rating)}</div>
-                    <div className='flex justify-around my-3'>
-                        <div><span>color:</span> {val.color}</div>
-                        <div><span>fuel:</span> {val.type}</div>
-                    </div>
-                    <div className='flex justify-around my-3'>
-                        <div><span>horsepower:</span> {val.horsepower}</div>
-                        <div>{val.drivetrain} <span> wheel drive</span></div>
-                    </div>
-                    <div className='flex justify-around items-center my-3'>
-                        <div>{val.rent} <span>per day</span></div>
-                        <button id={"rent" + val.id} onClick={() => rentclick(val)} className='hover rounded-[20px] bg-gradient-to-r from-sky-200 to-sky-400 py-1 px-10'>{cartitems.includes(val) ? 'Checkout' : 'Rent'}</button>
+                    <div className='text-[1rem]'>
+                        <div className='mt-4 ml-6 flex items-center'><span className='mr-2'>Rating:</span> {rating(val.rating)}</div>
+                        <div className='flex justify-around my-3'>
+                            <div><span>color:</span> {val.color}</div>
+                            <div><span>fuel:</span> {val.type}</div>
+                        </div>
+                        <div className='flex justify-around text-center my-3'>
+                            <div><span>horsepower:</span> {val.horsepower}</div>
+                            <div>{val.drivetrain} <span> wheel drive</span></div>
+                        </div>
+                        <div className='my-3'>
+                            <div className='ml-[7%]'>{val.rent} <span>per day</span></div>
+                            <button id={"rent" + val.id} onClick={() => rentclick(val)} className='hover ml-[7%] text-white mt-[1rem] text-[1rem] rounded-[20px] bg-gradient-to-r from-sky-200 to-sky-400 py-1 px-5'>{cartitems.includes(val) ? 'Checkout' : 'Rent'}</button>
+                        </div>
                     </div>
                 </div>)}
             </div>
