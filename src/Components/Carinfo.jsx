@@ -53,7 +53,7 @@ const Carinfo = ({rating, setcartitems, cartitems}) => {
                         {
                             width > 650 ? <div className='flex'>
                                 {
-                                othercars.map(car => <div key={car.id} className='mr-4' style={{width: width > 650 ? '35%' : '100%'}}>
+                                othercars.map(car => <div key={car.id} style={{width: width > 650 ? '35%' : '100%'}}>
                                     <img onClick={() => navigate(`/car/${car.id}`)} className='hover hover:opacity-[0.8] h-full object-cover w-full' src={car.image}/>
                                     <div className='text-white font-bold translate-y-[-170%] translate-x-4 z[1] text-xl'>{car.name}</div>
                                 </div>)

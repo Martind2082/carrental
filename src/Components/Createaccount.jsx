@@ -46,17 +46,17 @@ const Createaccount = () => {
             <img className="w-screen h-screen opacity-60" src="https://www.dollar.com/~/media/Dollar/Images/Business/Government/0618-business-government-car-tire-road.ashx"/>
             <div className='absolute top-[12vh] md:top-[15vh] rounded-[15px] ml-[5%] p-10 border-black border-2 bg-white' style={{left: width > 700 ? '5%' : '0%', width: width > 700 ? '35%' : '90%'}}>
                 <form ref={form} onSubmit={(e) => createaccount(form.current.name.value, form.current.email.value, form.current.password.value, e)} className='font-bold text-[1.2rem]'>
-                    <h1 className='text-2xl mb-3 text-center'>Create account to rent a car</h1>
-                    <div className='flex rounded-lg p-3 border-[1.5px] border-gray-400 items-center mb-8 mt-8'>
+                    <h1 className='text-xl md:text-2xl mb-3 text-center'>Create account to rent a car</h1>
+                    <div className='flex rounded-lg p-2 md:p-3 border-[1.5px] border-gray-400 items-center mb-8 mt-8'>
                         <FaUser className='mr-4' />
                         <input required name="name" className='outline-none font-thin text-[1rem] w-[85%]' placeholder='Name' type="text"/>
                     </div>
-                    <div id="signupemail" className='flex rounded-lg p-3 border-[1.5px] border-gray-400 items-center'>
+                    <div id="signupemail" className='flex rounded-lg p-2 md:p-3 border-[1.5px] border-gray-400 items-center'>
                         <FaEnvelope className='mr-4' />
                         <input required name="email" className='outline-none font-thin text-[1rem] w-[85%]' placeholder='Email' type="text"/>
                     </div>
                     <div className="accounterror" id="signupemailerror"></div>
-                    <div id="signuppassword" className='relative flex rounded-lg p-3 border-[1.5px] border-gray-400 items-center'>
+                    <div id="signuppassword" className='relative flex rounded-lg p-2 md:p-3 border-[1.5px] border-gray-400 items-center'>
                         <FaLock className='mr-4' />
                         <input required name="password" className='outline-none font-thin text-[1rem] w-[75%]' placeholder='Password' type={seepassword ? 'text' : 'password'}/>
                         {seepassword ? <FaEye className='hover absolute right-4 text-2xl text-gray-500' onClick={() => setseepassword(!seepassword)}/> : <FaEyeSlash className='hover absolute right-4 text-2xl text-gray-500' onClick={() => setseepassword(!seepassword)}/>}
