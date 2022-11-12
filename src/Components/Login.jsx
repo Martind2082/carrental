@@ -46,7 +46,7 @@ const Login = () => {
     return (
         <div className='flex' style={{justifyContent: width > 700 ? 'start' : 'center'}}> 
             <img className="w-screen h-screen opacity-60" src="https://www.dollar.com/~/media/Dollar/Images/Business/Government/0618-business-government-car-tire-road.ashx"/>
-            <div className='absolute rounded-[15px] top-[15vh] ml-[5%] p-10 border-black border-2 bg-white' style={{left: width > 700 ? '5%' : '0%', width: width > 700 ? '35%' : '90%'}}>
+            <div className='absolute rounded-[15px] top-[12vh] md:top-[15vh] ml-[5%] p-10 border-black border-2 bg-white' style={{left: width > 700 ? '5%' : '0%', width: width > 700 ? '35%' : '90%'}}>
                 <form ref={form} onSubmit={(e) => login(form.current.email.value, form.current.password.value, e)} className='font-bold text-[1.2rem] relative'>
                     <h1 className='text-2xl mb-3 text-center'>Log in to rent a car</h1>
                     <div id="loginemail" className='flex rounded-lg p-3 border-[1.5px] border-gray-400 items-center mt-8'>
