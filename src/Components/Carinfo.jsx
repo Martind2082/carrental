@@ -23,8 +23,8 @@ const Carinfo = ({rating, setcartitems, cartitems}) => {
     }
     return (
         <div className='translate-y-[16%]'>
-            <div className='flex text-xl translate-x-[12%] mb-4'>
-                <div onClick={() => navigate('/cars')} className="flex items-center font-bold mr-6 hover hover:underline"><FaChevronLeft className='mr-2'/> All Cars</div>
+            <div className='flex text-xl mb-4'>
+                <div onClick={() => navigate('/cars')} className="flex ml-[7%] items-center font-bold mr-6 hover hover:underline"><FaChevronLeft className='mr-2'/> All Cars</div>
                 <div onClick={() => navigate(`/cars/${carslist[id].name.split(' ')[0].toLowerCase()}`)} className='flex items-center font-bold hover hover:underline'><FaChevronLeft className='mr-2'/>{carslist[id].name.split(' ')[0]} Cars</div>
             </div>
             <div className='flex shadow-2xl' style={{flexDirection: width > 650 ? 'row' : 'column', width: width > 650 ? '80%' : '100%'}}>
