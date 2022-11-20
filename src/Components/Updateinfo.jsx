@@ -52,7 +52,6 @@ const Updateinfo = ({name, setAccount, updateemailref, updatepasswordref}) => {
     useEffect(() => {
         if (loginerror !== '') {
             setnewuserbyupdateprofile(true);
-            console.log('is set to true');
             let popup = document.createElement('div');
             popup.classList.add('popup');
             popup.textContent = "Incorrect Password";

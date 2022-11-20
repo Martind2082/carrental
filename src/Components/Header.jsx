@@ -26,7 +26,7 @@ const Header = () => {
     const updatepasswordRef = useRef();
 
     const loginclick = () => {
-        if (menuref.current.style.opacity !== '0') {
+        if (menuref.current && menuref.current.style.opacity == '1') {
             menuref.current.style.transform = 'translateX(100%)';
             menuref.current.style.opacity = '0';
             menuref.current.style.visibility = 'hidden';
