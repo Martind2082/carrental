@@ -43,11 +43,17 @@ const Login = () => {
             }
         }
     }, [loginerror])
+    function buttoncolorswitch() {
+        form.current.login.style.background = 'lightblue';
+        setTimeout(() => {
+            form.current.login.style.background = 'linear-gradient(270deg, #3b82f6, #60a5fa)';
+        }, 500);
+    }
     return (
         <div className='flex' style={{justifyContent: width > 700 ? 'start' : 'center'}}> 
             <img className="w-screen h-screen opacity-60" src="https://www.dollar.com/~/media/Dollar/Images/Business/Government/0618-business-government-car-tire-road.ashx"/>
             <div className='absolute rounded-[15px] top-[12vh] md:top-[15vh] ml-[5%] p-10 border-black border-2 bg-white' style={{left: width > 700 ? '5%' : '0%', width: width > 700 ? '35%' : '90%'}}>
-                <form ref={form} onSubmit={(e) => login(form.current.email.value, form.current.password.value, e)} className='font-bold text-[1.2rem] relative'>
+                <form ref={form} onSubmit={(e) => {login(form.current.email.value, form.current.password.value, e); buttoncolorswitch()}} className='font-bold text-[1.2rem] relative'>
                     <h1 className='text-2xl mb-3 text-center'>Log in to rent a car</h1>
                     <div id="loginemail" className='flex rounded-lg p-3 border-[1.5px] border-gray-400 items-center mt-8'>
                         <FaEnvelope className='mr-4 text-gray-500' />
@@ -60,7 +66,7 @@ const Login = () => {
                         {seepassword ? <FaEye className='hover absolute right-4 text-2xl text-gray-500' onClick={() => setseepassword(!seepassword)}/> : <FaEyeSlash className='hover absolute right-4 text-2xl text-gray-500' onClick={() => setseepassword(!seepassword)}/>}
                     </div>
                     <div className="accounterror" id="loginpassworderror"></div>
-                    <input value="Login" className='hover my-3 text-[1rem] md:text-[1.2rem] text-white block bg-gradient-to-r from-blue-400 to-blue-500 w-full rounded-[10px] py-2' type="submit" />
+                    <input value="Login" name="login" className='hover my-3 text-[1rem] md:text-[1.2rem] text-white block bg-gradient-to-r from-blue-400 to-blue-500 w-full rounded-[10px] py-2' type="submit" />
                     <Link to="/forgotpassword"><p className='text-center hover hover:underline text-blue-600'>Forgot your password?</p></Link>
                     <div className="flex items-center my-4">
                         <div className='w-2/4 h-[1px] bg-gray-400'></div>
