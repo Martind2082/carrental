@@ -27,7 +27,7 @@ const Carinfo = ({rating, setcartitems, cartitems}) => {
                 <div onClick={() => navigate('/cars')} className="flex ml-[7%] items-center font-bold mr-6 hover hover:underline"><FaChevronLeft className='mr-2'/> All Cars</div>
                 <div onClick={() => navigate(`/cars/${carslist[id].name.split(' ')[0].toLowerCase()}`)} className='flex items-center font-bold hover hover:underline'><FaChevronLeft className='mr-2'/>{carslist[id].name.split(' ')[0]} Cars</div>
             </div>
-            <div className='flex shadow-2xl' style={{flexDirection: width > 650 ? 'row' : 'column', width: width > 650 ? '80%' : '100%'}}>
+            <div className='flex shadow-2xl mx-auto' style={{flexDirection: width > 650 ? 'row' : 'column', width: width > 650 ? '80%' : '100%'}}>
                 <img className='h-[100%] object-cover' style={{width: width > 650 ? '50%' : '100%'}} src={carslist[id].image}/>
                 <div className='pl-4 font-bold flex flex-col justify-around'>
                     <div className='font-bold text-2xl md:text-3xl my-3'>{carslist[id].name}</div>
