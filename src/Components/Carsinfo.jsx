@@ -1,7 +1,7 @@
 import {useParams} from 'react-router-dom';
 import list from '../cars.json';
 import {useNavigate} from 'react-router-dom';
-
+import {FaChevronLeft} from 'react-icons/fa'
 const Carsinfo = ({sort, setSort, rating, setcartitems, cartitems}) => {
     let width = window.innerWidth;
     let navigate = useNavigate();
@@ -36,8 +36,9 @@ const Carsinfo = ({sort, setSort, rating, setcartitems, cartitems}) => {
     return (
         <div className='pb-[15rem]'>
                 <div className='text-2xl font-bold translate-y-[15vh] flex w-[85%]' style={{flexDirection: width > 900 ? 'row' : 'column', marginLeft: width > 900 ? '5rem' : '7.5%'}}>
+                    <div onClick={() => navigate("/cars")} className='flex justify-center items-center mr-[4rem] text-xl hover hover:underline'><FaChevronLeft/> All Cars</div>
                     <div>{array.length} results for {name}</div>
-                    <select onChange={(e) => setSort(e.target.value)} value={sort} className="text-xl border border-black" style={{marginTop: width > 900 ? '0' : '1rem', marginLeft: width > 900 ? '3rem' : '0rem'}}>
+                    <select onChange={(e) => setSort(e.target.value)} value={sort} className="text-xl border border-black" style={{marginTop: width > 900 ? '0' : '1rem', marginLeft: width > 900 ? '2rem' : '0rem'}}>
                         <option value="lowtohigh">Price low to high</option>
                         <option value="hightolow">Price high to low</option>
                         <option value="rating">Rating</option>
