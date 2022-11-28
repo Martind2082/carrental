@@ -127,7 +127,7 @@ const Header = () => {
                 <button onClick={() => {signout(); deleteAccount(); setAccount(false);}} className='hover:underline border-2 border-orange-400 rounded-lg px-5 py-1 text-orange-400 font-bold'>Delete Account</button>
             </div>
             {
-                width > 900 ? <div className="flex justify-between items-center w-screen h-[15vh] fixed font-bold z-[10]">
+                width > 900 ? <div className="flex justify-between items-center w-screen h-[15vh] fixed font-bold z-[10]" style={{background: 'rgba(0,0,0,0.3)'}}>
                     <img onClick={() => navigate("/")} className="hover h-full ml-[10%]" src={logo} />
                     <div className="flex w-max justify-between items-center px-[2rem] text-2xl mr-5">
                         <Link to="/"><div className='hover:underline hover p-3'>Home</div></Link>
