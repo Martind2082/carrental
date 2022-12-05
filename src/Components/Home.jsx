@@ -8,6 +8,7 @@ import {useNavigate} from 'react-router-dom';
 import { useRef } from 'react';
 import { useContext } from 'react';
 import {firebasecontext} from '../FirebaseContext';
+import { FaChevronDown } from 'react-icons/fa'
 
 const Home = ({setSort}) => {
     const {carslist} = list;
@@ -24,6 +25,9 @@ const Home = ({setSort}) => {
     }
     function scrolltop() {
         window.scrollTo(0, 0);
+    }
+    function scrolldown() {
+        document.querySelector('#home-bottom').scrollIntoView({behavior: 'smooth'});
     }
     return (
         <div>
@@ -69,8 +73,9 @@ const Home = ({setSort}) => {
                 </select>
                 <input className="hover w-[30%] rounded-md bg-gradient-to-r from-blue-300 to-blue-400" value="Search" type="submit"/>
             </form>
+            <FaChevronDown onClick={scrolldown} className='arrowupdown hover absolute left-2/4 bottom-[3rem] text-blue-800 -translate-x-2/4 -translate-y-2/4 z-[3] text-[2rem]' />
 
-            <div className='p-10 5'>
+            <div id="home-bottom" className='p-10 5'>
                 <div className='topbrands flex w-[80%] mx-auto mb-10 justify-center items-center' style={{flexDirection: window.innerWidth > 900 ? 'row' : 'column'}}>
                     <p className='text-2xl md:text-3xl font-bold' style={{marginRight: window.innerWidth > 900 ? '3rem' : '0', marginBottom: window.innerWidth > 900 ? '0' : '1rem'}}>Top Brands</p>
                     {
