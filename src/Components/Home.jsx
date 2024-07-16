@@ -82,7 +82,7 @@ const Home = ({setSort}) => {
                         window.innerWidth > 900 ? <div className='flex'>
                             <div onClick={() => {navigate("/cars/tesla"); scrolltop()}}><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Tesla_T_symbol.svg/800px-Tesla_T_symbol.svg.png"/></div>
                             <div onClick={() => {navigate("/cars/toyota"); scrolltop()}}><img src="https://www.freepnglogos.com/uploads/toyota-logo-png/toyota-logos-brands-10.png" /></div>
-                            <div onClick={() => {navigate("/cars/honda"); scrolltop()}}><img src="https://allcarbrandslist.com/wp-content/uploads/2020/12/Honda-Emblem.png" /></div>
+                            <div onClick={() => {navigate("/cars/honda"); scrolltop()}}><img src="https://1000logos.net/wp-content/uploads/2018/03/Colour-Honda-logo.jpg" /></div>
                             <div onClick={() => {navigate("/cars/ford"); scrolltop()}}><img src="https://www.carlogos.org/car-logos/ford-logo-2003.png"/></div>
                             <div onClick={() => {navigate("/cars/subaru"); scrolltop()}}><img src="https://logos-world.net/wp-content/uploads/2021/04/Subaru-Logo.png" /></div>
                         </div> : <div className='flex flex-col'>
